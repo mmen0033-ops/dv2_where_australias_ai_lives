@@ -1,0 +1,521 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Explore the data: click any state to filter",
+    "subtitle": "Click a state bar to filter the map and operator breakdown below. Click empty space to reset.",
+    "anchor": "start"
+  },
+  "vconcat": [
+    {
+      "width": 620,
+      "height": 160,
+      "title": {
+        "text": "Capacity by state (MW)",
+        "fontSize": 12,
+        "subtitle": "Click to filter",
+        "subtitleFontSize": 10
+      },
+      "data": {
+        "url": "data/data_centres.csv"
+      },
+      "params": [
+        {
+          "name": "state_select",
+          "select": {
+            "type": "point",
+            "fields": [
+              "state"
+            ],
+            "toggle": "true",
+            "clear": "dblclick"
+          },
+          "value": null
+        }
+      ],
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "capacity_mw",
+              "as": "total_mw"
+            }
+          ],
+          "groupby": [
+            "state"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "sort": "-y",
+          "title": null,
+          "axis": {
+            "labelFontWeight": 600,
+            "labelColor": "#161616",
+            "labelFontSize": 12
+          }
+        },
+        "y": {
+          "field": "total_mw",
+          "type": "quantitative",
+          "title": "MW",
+          "axis": {
+            "format": ",.0f"
+          }
+        },
+        "color": {
+          "condition": {
+            "param": "state_select",
+            "value": "#161616"
+          },
+          "value": "#9CA8AD"
+        },
+        "opacity": {
+          "condition": {
+            "param": "state_select",
+            "value": 1,
+            "empty": true
+          },
+          "value": 0.35
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "total_mw",
+            "type": "quantitative",
+            "title": "Capacity (MW)",
+            "format": ",.1f"
+          }
+        ]
+      }
+    },
+    {
+      "width": 620,
+      "height": 440,
+      "title": {
+        "text": "The same facilities, packed as a Dorling cartogram (click a state above to filter)",
+        "fontSize": 12
+      },
+      "projection": {
+        "type": "mercator",
+        "scale": 600,
+        "center": [
+          134,
+          -25.5
+        ]
+      },
+      "layer": [
+        {
+          "data": {
+            "sphere": true
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#E9ECEE",
+            "clip": true
+          }
+        },
+        {
+          "data": {
+            "graticule": {
+              "step": [
+                10,
+                10
+              ]
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "filled": false,
+            "stroke": "#D8DAD6",
+            "strokeWidth": 0.4,
+            "strokeOpacity": 0.8,
+            "clip": true
+          }
+        },
+        {
+          "data": {
+            "url": "data/au_geo.topo.json",
+            "format": {
+              "type": "topojson",
+              "feature": "au_states"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#ECEBE4",
+            "stroke": "#D8D4C8",
+            "strokeWidth": 0.7,
+            "clip": true
+          }
+        },
+        {
+          "data": {
+            "url": "data/dc_dorling.json"
+          },
+          "transform": [
+            {
+              "filter": {
+                "param": "state_select"
+              }
+            },
+            {
+              "filter": "datum.dist_moved > 6"
+            }
+          ],
+          "mark": {
+            "type": "rule",
+            "stroke": "#9AA0A0",
+            "strokeWidth": 0.35,
+            "opacity": 0.35,
+            "clip": true
+          },
+          "encoding": {
+            "x": {
+              "field": "anchor_x",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  620
+                ],
+                "range": [
+                  0,
+                  620
+                ]
+              },
+              "axis": null
+            },
+            "y": {
+              "field": "anchor_y",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  440
+                ],
+                "range": [
+                  0,
+                  440
+                ]
+              },
+              "axis": null
+            },
+            "x2": {
+              "field": "x"
+            },
+            "y2": {
+              "field": "y"
+            }
+          }
+        },
+        {
+          "data": {
+            "url": "data/dc_dorling.json"
+          },
+          "transform": [
+            {
+              "filter": {
+                "param": "state_select"
+              }
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "stroke": "white",
+            "strokeWidth": 1.0,
+            "opacity": 0.9,
+            "cursor": "pointer",
+            "clip": true
+          },
+          "encoding": {
+            "x": {
+              "field": "x",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  620
+                ],
+                "range": [
+                  0,
+                  620
+                ]
+              },
+              "axis": null
+            },
+            "y": {
+              "field": "y",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  440
+                ],
+                "range": [
+                  0,
+                  440
+                ]
+              },
+              "axis": null
+            },
+            "size": {
+              "field": "capacity_mw",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  130
+                ],
+                "range": [
+                  0,
+                  1256.6
+                ]
+              },
+              "title": "MW",
+              "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "offset": 10,
+                "values": [
+                  20,
+                  60,
+                  100
+                ]
+              }
+            },
+            "color": {
+              "field": "operator_type",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Foreign Hyperscaler",
+                  "Foreign",
+                  "Domestic"
+                ],
+                "range": [
+                  "#E0584F",
+                  "#F39C42",
+                  "#1F8B8A"
+                ]
+              },
+              "title": "Ownership",
+              "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "offset": 6
+              }
+            },
+            "order": {
+              "field": "capacity_mw",
+              "type": "quantitative",
+              "sort": "descending"
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "Facility"
+              },
+              {
+                "field": "operator",
+                "type": "nominal",
+                "title": "Operator"
+              },
+              {
+                "field": "suburb",
+                "type": "nominal",
+                "title": "Suburb"
+              },
+              {
+                "field": "state",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "capacity_mw",
+                "type": "quantitative",
+                "title": "MW",
+                "format": ".1f"
+              },
+              {
+                "field": "year_opened",
+                "type": "quantitative",
+                "title": "Opened",
+                "format": "d"
+              }
+            ]
+          }
+        }
+      ],
+      "resolve": {
+        "scale": {
+          "size": "independent"
+        }
+      },
+      "view": {
+        "stroke": null
+      }
+    },
+    {
+      "width": 620,
+      "height": 200,
+      "title": {
+        "text": "Operators in view",
+        "fontSize": 12
+      },
+      "data": {
+        "url": "data/data_centres.csv"
+      },
+      "transform": [
+        {
+          "filter": {
+            "param": "state_select"
+          }
+        },
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "capacity_mw",
+              "as": "total_mw"
+            }
+          ],
+          "groupby": [
+            "operator",
+            "operator_type"
+          ]
+        },
+        {
+          "window": [
+            {
+              "op": "rank",
+              "as": "rank"
+            }
+          ],
+          "sort": [
+            {
+              "field": "total_mw",
+              "order": "descending"
+            }
+          ]
+        },
+        {
+          "filter": "datum.rank <= 12"
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "operator",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null,
+          "axis": {
+            "labelFontWeight": 500,
+            "labelColor": "#161616"
+          }
+        },
+        "x": {
+          "field": "total_mw",
+          "type": "quantitative",
+          "title": "Capacity (MW)",
+          "axis": {
+            "format": ",.0f"
+          }
+        },
+        "color": {
+          "field": "operator_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Foreign Hyperscaler",
+              "Foreign",
+              "Domestic"
+            ],
+            "range": [
+              "#E0584F",
+              "#F39C42",
+              "#1F8B8A"
+            ]
+          },
+          "title": "Ownership",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "operator",
+            "type": "nominal",
+            "title": "Operator"
+          },
+          {
+            "field": "total_mw",
+            "type": "quantitative",
+            "title": "MW",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#54544F",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#161616",
+      "titleFontWeight": 600,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "axisX": {
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  },
+  "spacing": 28
+}

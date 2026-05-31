@@ -1,0 +1,80 @@
+sa4_code,sa4_name,state,lat,lon,population
+102,Sydney - Inner City,NSW,-33.8688,151.2093,314800
+115,Sydney - North Sydney and Hornsby,NSW,-33.7969,151.1834,488600
+116,Sydney - Northern Beaches,NSW,-33.7521,151.2898,271700
+117,Sydney - Parramatta,NSW,-33.815,151.0011,442000
+118,Sydney - Ryde,NSW,-33.8133,151.1014,196200
+119,Sydney - South West,NSW,-33.9647,150.8703,414300
+120,Sydney - Sutherland,NSW,-34.0307,151.0581,234900
+127,Sydney - Inner West,NSW,-33.8908,151.1648,313700
+128,Sydney - Eastern Suburbs,NSW,-33.8915,151.2477,308500
+125,Sydney - Outer South West,NSW,-34.0167,150.7167,350800
+126,Sydney - Outer West and Blue Mountains,NSW,-33.7506,150.6939,309200
+111,Central Coast,NSW,-33.4269,151.3424,348200
+108,Newcastle and Lake Macquarie,NSW,-32.9283,151.7817,392200
+103,Illawarra,NSW,-34.4279,150.8931,309700
+105,Mid North Coast,NSW,-31.4333,152.9167,226300
+107,New England and North West,NSW,-30.5167,151.6667,188800
+109,Richmond - Tweed,NSW,-28.65,153.3667,252600
+112,Coffs Harbour - Grafton,NSW,-30.2963,153.1135,142500
+121,Far West and Orana,NSW,-31.9667,145.9333,124800
+206,Melbourne - Inner,VIC,-37.8136,144.9631,327600
+207,Melbourne - Inner East,VIC,-37.852,145.05,411200
+208,Melbourne - Inner South,VIC,-37.902,145.024,469300
+209,Melbourne - North East,VIC,-37.71,145.07,591600
+210,Melbourne - North West,VIC,-37.72,144.88,460900
+211,Melbourne - Outer East,VIC,-37.85,145.27,481300
+212,Melbourne - South East,VIC,-38.03,145.27,802100
+213,Melbourne - West,VIC,-37.8,144.7,1018200
+214,Mornington Peninsula,VIC,-38.35,145.05,173700
+201,Ballarat,VIC,-37.5622,143.8503,122100
+202,Bendigo,VIC,-36.757,144.2794,165400
+203,Geelong,VIC,-38.1499,144.3617,312900
+204,Hume,VIC,-36.4,145.7,174200
+205,Latrobe - Gippsland,VIC,-38.25,146.4,287000
+215,Shepparton,VIC,-36.3833,145.4,67800
+216,Warrnambool and South West,VIC,-38.3833,142.4833,109800
+302,Brisbane - East,QLD,-27.47,153.15,256800
+303,Brisbane - North,QLD,-27.35,153.03,230400
+304,Brisbane - South,QLD,-27.55,153.04,379900
+305,Brisbane - West,QLD,-27.49,152.93,187600
+306,Brisbane Inner City,QLD,-27.4698,153.0251,311100
+307,Gold Coast,QLD,-28.0167,153.4,668200
+308,Ipswich,QLD,-27.6167,152.7667,386500
+309,Logan - Beaudesert,QLD,-27.7833,153.1167,367600
+310,Moreton Bay - North,QLD,-27.15,152.95,240200
+311,Moreton Bay - South,QLD,-27.3,153.05,246600
+312,Sunshine Coast,QLD,-26.65,153.0667,387800
+313,Toowoomba,QLD,-27.5598,151.9507,175200
+314,Wide Bay,QLD,-25.55,152.7333,311700
+315,Mackay - Isaac - Whitsunday,QLD,-21.1438,149.1869,184400
+316,Townsville,QLD,-19.25,146.8167,232700
+317,Cairns,QLD,-16.9203,145.771,257400
+318,Queensland - Outback,QLD,-22.0,144.0,80100
+319,Central Queensland,QLD,-23.3833,150.5,234300
+320,Darling Downs - Maranoa,QLD,-27.5,150.5,134500
+321,Fitzroy,QLD,-23.5,150.5,232800
+501,Perth - Inner,WA,-31.9522,115.8614,130100
+502,Perth - North East,WA,-31.85,116.0,235300
+503,Perth - North West,WA,-31.8,115.8,612300
+504,Perth - South East,WA,-32.15,116.0,451400
+505,Perth - South West,WA,-32.05,115.85,408400
+506,Mandurah,WA,-32.5269,115.7217,96100
+507,Bunbury,WA,-33.3267,115.6411,199600
+508,Western Australia - Outback (North),WA,-22.0,121.0,92500
+509,Western Australia - Outback (South),WA,-30.75,121.4667,91800
+510,Western Australia - Wheat Belt,WA,-31.5,117.0,76200
+401,Adelaide - Central and Hills,SA,-34.9285,138.6007,281200
+402,Adelaide - North,SA,-34.75,138.6,433500
+403,Adelaide - South,SA,-35.05,138.5,374600
+404,Adelaide - West,SA,-34.9,138.5,250200
+405,Barossa - Yorke - Mid North,SA,-34.55,138.75,119800
+406,South Australia - Outback,SA,-30.0,135.0,76500
+407,South Australia - South East,SA,-37.0,140.0,124900
+601,Hobart,TAS,-42.8821,147.3272,247700
+602,Launceston and North East,TAS,-41.44,147.145,145700
+603,South East,TAS,-42.85,147.5,81100
+604,West and North West,TAS,-41.183,145.9067,110200
+701,Darwin,NT,-12.4634,130.8456,143900
+702,Northern Territory - Outback,NT,-19.0,134.0,109200
+801,Australian Capital Territory,ACT,-35.2809,149.13,472600

@@ -1,0 +1,140 @@
+[
+  {
+    "country": "International",
+    "cable_name": "Southern Cross Cable",
+    "cable_year": 2000,
+    "participates": 1
+  },
+  {
+    "country": "International",
+    "cable_name": "Southern Cross NEXT",
+    "cable_year": 2022,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Australia-Japan Cable",
+    "cable_year": 2001,
+    "participates": 1
+  },
+  {
+    "country": "Japan",
+    "cable_name": "Australia-Japan Cable",
+    "cable_year": 2001,
+    "participates": 1
+  },
+  {
+    "country": "International",
+    "cable_name": "Australia-Japan Cable",
+    "cable_year": 2001,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Telstra Endeavour",
+    "cable_year": 2008,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "cable_year": 2009,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Australia Singapore Cable",
+    "cable_year": 2018,
+    "participates": 1
+  },
+  {
+    "country": "USA",
+    "cable_name": "INDIGO West",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "INDIGO West",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "Singapore",
+    "cable_name": "INDIGO West",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "USA",
+    "cable_name": "INDIGO Central",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "INDIGO Central",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "Singapore",
+    "cable_name": "INDIGO Central",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "USA",
+    "cable_name": "JGA South",
+    "cable_year": 2020,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "JGA South",
+    "cable_year": 2020,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Coral Sea Cable System",
+    "cable_year": 2019,
+    "participates": 1
+  },
+  {
+    "country": "International",
+    "cable_name": "Hawaiki Cable",
+    "cable_year": 2018,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Tasman Global Access",
+    "cable_year": 2017,
+    "participates": 1
+  },
+  {
+    "country": "New Zealand",
+    "cable_name": "Tasman Global Access",
+    "cable_year": 2017,
+    "participates": 1
+  },
+  {
+    "country": "International",
+    "cable_name": "SEA-ME-WE 3",
+    "cable_year": 2000,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Oman Australia Cable",
+    "cable_year": 2022,
+    "participates": 1
+  },
+  {
+    "country": "Australia",
+    "cable_name": "Asia Connect Cable (ACC-1)",
+    "cable_year": 2025,
+    "participates": 1
+  }
+]

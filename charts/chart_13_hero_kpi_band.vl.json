@@ -1,0 +1,161 @@
+{
+  "width": 540,
+  "height": 140,
+  "title": {
+    "text": "Headline numbers",
+    "subtitle": "Total capacity, US-owned share, cable count, and population within 15ms"
+  },
+  "data": {
+    "values": [
+      {
+        "label": "1,648 MW",
+        "context": "Total operational capacity",
+        "x": 0
+      },
+      {
+        "label": "72%",
+        "context": "US-owned share",
+        "x": 1
+      },
+      {
+        "label": "15",
+        "context": "Submarine cables to world",
+        "x": 2
+      },
+      {
+        "label": "84%",
+        "context": "Population within 15ms of hyperscaler",
+        "x": 3
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 36,
+        "fontWeight": 700,
+        "color": "#E0584F",
+        "align": "center",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              -0.5,
+              3.5
+            ]
+          }
+        },
+        "y": {
+          "datum": 1,
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              2
+            ]
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#6B6B68",
+        "align": "center",
+        "baseline": "top",
+        "dy": 18,
+        "limit": 130
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              -0.5,
+              3.5
+            ]
+          }
+        },
+        "y": {
+          "datum": 1,
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              2
+            ]
+          }
+        },
+        "text": {
+          "field": "context",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#6B6B68",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#1A1A1A",
+      "titleFontWeight": 500,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "axisX": {
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 500,
+      "padding": 0,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1A1A1A",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#6B6B68"
+    }
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  }
+}

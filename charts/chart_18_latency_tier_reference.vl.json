@@ -1,0 +1,155 @@
+{
+  "width": 540,
+  "height": 260,
+  "title": {
+    "text": "What each latency range means in practice",
+    "subtitle": "Each bar shows the share of Australia's population in that latency range"
+  },
+  "data": {
+    "url": "data/latency_tiers.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 2,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "tier",
+          "type": "nominal",
+          "sort": "y",
+          "title": "Latency tier",
+          "axis": {
+            "labelFontWeight": 500,
+            "labelColor": "#1A1A1A"
+          }
+        },
+        "x": {
+          "field": "population_pct",
+          "type": "quantitative",
+          "title": "Population share (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "color": {
+          "field": "tier",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              "<15ms",
+              "15-25ms",
+              "25-50ms",
+              "50-100ms"
+            ],
+            "range": [
+              "#E6DEF2",
+              "#BFA9DA",
+              "#9670BD",
+              "#653A98"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "tier",
+            "type": "nominal",
+            "title": "Latency"
+          },
+          {
+            "field": "use_case",
+            "type": "nominal",
+            "title": "Use case"
+          },
+          {
+            "field": "population_pct",
+            "type": "quantitative",
+            "title": "Population %"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 10,
+        "color": "#1A1A1A",
+        "limit": 360
+      },
+      "encoding": {
+        "y": {
+          "field": "tier",
+          "type": "nominal",
+          "sort": "y"
+        },
+        "x": {
+          "field": "population_pct",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "use_case",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#6B6B68",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#1A1A1A",
+      "titleFontWeight": 500,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "axisX": {
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 500,
+      "padding": 0,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1A1A1A",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#6B6B68"
+    }
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  }
+}

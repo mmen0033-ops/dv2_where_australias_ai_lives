@@ -1,0 +1,479 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 560,
+  "height": 440,
+  "title": {
+    "text": "Melbourne: the second cluster",
+    "subtitle": "Each circle is a Melbourne data centre, sized by capacity. Hover to isolate one."
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E9ECEE",
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/metro_coast.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "metro_coast"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.city == 'Melbourne'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#C9C3B5",
+        "strokeWidth": 0.6,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_sa4"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F7F5F0",
+        "stroke": "#D5D2C9",
+        "strokeWidth": 0.6,
+        "clip": true,
+        "fillOpacity": 0.5
+      },
+      "encoding": {}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lbl": "Inner",
+            "lat": -37.8,
+            "lon": 144.96
+          },
+          {
+            "lbl": "Inner East",
+            "lat": -37.8,
+            "lon": 145.1
+          },
+          {
+            "lbl": "Inner South",
+            "lat": -37.95,
+            "lon": 145.06
+          },
+          {
+            "lbl": "North East",
+            "lat": -37.52,
+            "lon": 145.17
+          },
+          {
+            "lbl": "North West",
+            "lat": -37.48,
+            "lon": 144.75
+          },
+          {
+            "lbl": "South East",
+            "lat": -38.07,
+            "lon": 145.47
+          },
+          {
+            "lbl": "West",
+            "lat": -37.78,
+            "lon": 144.63
+          },
+          {
+            "lbl": "Mornington",
+            "lat": -38.31,
+            "lon": 145.06
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 8.5,
+        "fill": "#8A8780",
+        "fontWeight": 500,
+        "opacity": 0.75,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/data_centres.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.city == 'Melbourne'"
+        },
+        {
+          "calculate": "datum.capacity_mw / 457.5 * 100",
+          "as": "_share"
+        },
+        {
+          "calculate": "datum.operator_type == 'Foreign Hyperscaler' ? 'Foreign hyperscaler' : datum.operator_type == 'Foreign' ? 'Foreign-owned' : 'Australian-owned'",
+          "as": "_own"
+        }
+      ],
+      "params": [
+        {
+          "name": "hl_melbourne",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "fields": [
+              "name"
+            ],
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 1.2,
+        "cursor": "pointer",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              130
+            ],
+            "range": [
+              70,
+              1900
+            ]
+          },
+          "title": "Capacity (MW)",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 10,
+            "values": [
+              20,
+              60,
+              100
+            ]
+          }
+        },
+        "color": {
+          "field": "operator_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Foreign Hyperscaler",
+              "Foreign",
+              "Domestic"
+            ],
+            "range": [
+              "#E0584F",
+              "#F39C42",
+              "#1F8B8A"
+            ]
+          },
+          "title": "Ownership",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 6
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "hl_melbourne",
+            "value": 0.95,
+            "empty": true
+          },
+          "value": 0.32
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Facility"
+          },
+          {
+            "field": "operator",
+            "type": "nominal",
+            "title": "Operator"
+          },
+          {
+            "field": "_own",
+            "type": "nominal",
+            "title": "Ownership"
+          },
+          {
+            "field": "suburb",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "capacity_mw",
+            "type": "quantitative",
+            "title": "Capacity (MW)",
+            "format": ".0f"
+          },
+          {
+            "field": "_share",
+            "type": "quantitative",
+            "title": "Share of Melbourne (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "year_opened",
+            "type": "quantitative",
+            "title": "Opened",
+            "format": "d"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lat": -37.674,
+            "lon": 144.8405,
+            "lbl": "Tullamarine",
+            "dx": 0,
+            "dy": -15,
+            "al": "middle"
+          },
+          {
+            "lat": -37.7905,
+            "lon": 144.7775,
+            "lbl": "Derrimut",
+            "dx": -10,
+            "dy": -4,
+            "al": "end"
+          },
+          {
+            "lat": -37.815,
+            "lon": 144.739,
+            "lbl": "Truganina",
+            "dx": -10,
+            "dy": 14,
+            "al": "end"
+          },
+          {
+            "lat": -37.799,
+            "lon": 144.9,
+            "lbl": "Footscray",
+            "dx": 12,
+            "dy": -10,
+            "al": "start"
+          },
+          {
+            "lat": -37.841,
+            "lon": 144.942,
+            "lbl": "Port Melbourne",
+            "dx": 0,
+            "dy": 20,
+            "al": "middle"
+          },
+          {
+            "lat": -37.822,
+            "lon": 145.029,
+            "lbl": "Hawthorn",
+            "dx": 12,
+            "dy": 8,
+            "al": "start"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "fill": "white",
+        "clip": true,
+        "stroke": "white",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        },
+        "dx": {
+          "field": "dx",
+          "type": "quantitative"
+        },
+        "dy": {
+          "field": "dy",
+          "type": "quantitative"
+        },
+        "align": {
+          "field": "al",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lat": -37.674,
+            "lon": 144.8405,
+            "lbl": "Tullamarine",
+            "dx": 0,
+            "dy": -15,
+            "al": "middle"
+          },
+          {
+            "lat": -37.7905,
+            "lon": 144.7775,
+            "lbl": "Derrimut",
+            "dx": -10,
+            "dy": -4,
+            "al": "end"
+          },
+          {
+            "lat": -37.815,
+            "lon": 144.739,
+            "lbl": "Truganina",
+            "dx": -10,
+            "dy": 14,
+            "al": "end"
+          },
+          {
+            "lat": -37.799,
+            "lon": 144.9,
+            "lbl": "Footscray",
+            "dx": 12,
+            "dy": -10,
+            "al": "start"
+          },
+          {
+            "lat": -37.841,
+            "lon": 144.942,
+            "lbl": "Port Melbourne",
+            "dx": 0,
+            "dy": 20,
+            "al": "middle"
+          },
+          {
+            "lat": -37.822,
+            "lon": 145.029,
+            "lbl": "Hawthorn",
+            "dx": 12,
+            "dy": 8,
+            "al": "start"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "fill": "#161616",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        },
+        "dx": {
+          "field": "dx",
+          "type": "quantitative"
+        },
+        "dy": {
+          "field": "dy",
+          "type": "quantitative"
+        },
+        "align": {
+          "field": "al",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "scale": 38000,
+    "center": [
+      144.88,
+      -37.8
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  }
+}

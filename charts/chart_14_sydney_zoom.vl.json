@@ -1,0 +1,529 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 560,
+  "height": 440,
+  "title": {
+    "text": "Sydney: where the facilities actually sit",
+    "subtitle": "Each circle is a Sydney data centre, sized by capacity. Hover to isolate one."
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E9ECEE",
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/metro_coast.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "metro_coast"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.city == 'Sydney'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#C9C3B5",
+        "strokeWidth": 0.6,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_sa4"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F7F5F0",
+        "stroke": "#D5D2C9",
+        "strokeWidth": 0.6,
+        "clip": true,
+        "fillOpacity": 0.5
+      },
+      "encoding": {}
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lbl": "Baulkham Hills",
+            "lat": -33.37,
+            "lon": 150.83
+          },
+          {
+            "lbl": "Blacktown",
+            "lat": -33.74,
+            "lon": 150.86
+          },
+          {
+            "lbl": "City",
+            "lat": -33.92,
+            "lon": 151.22
+          },
+          {
+            "lbl": "Eastern\nSuburbs",
+            "lat": -33.92,
+            "lon": 151.3
+          },
+          {
+            "lbl": "Inner SW",
+            "lat": -33.94,
+            "lon": 151.06
+          },
+          {
+            "lbl": "Inner West",
+            "lat": -33.87,
+            "lon": 151.12
+          },
+          {
+            "lbl": "North Sydney",
+            "lat": -33.69,
+            "lon": 151.16
+          },
+          {
+            "lbl": "Northern\nBeaches",
+            "lat": -33.65,
+            "lon": 151.28
+          },
+          {
+            "lbl": "Outer SW",
+            "lat": -34.12,
+            "lon": 150.68
+          },
+          {
+            "lbl": "Parramatta",
+            "lat": -33.83,
+            "lon": 151.0
+          },
+          {
+            "lbl": "Ryde",
+            "lat": -33.79,
+            "lon": 151.1
+          },
+          {
+            "lbl": "South West",
+            "lat": -33.93,
+            "lon": 150.82
+          },
+          {
+            "lbl": "Sutherland",
+            "lat": -34.08,
+            "lon": 151.06
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 8.5,
+        "fill": "#8A8780",
+        "fontWeight": 500,
+        "opacity": 0.75,
+        "clip": true,
+        "lineBreak": "\\n"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/data_centres.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.city == 'Sydney'"
+        },
+        {
+          "calculate": "datum.capacity_mw / 1068.2 * 100",
+          "as": "_share"
+        },
+        {
+          "calculate": "datum.operator_type == 'Foreign Hyperscaler' ? 'Foreign hyperscaler' : datum.operator_type == 'Foreign' ? 'Foreign-owned' : 'Australian-owned'",
+          "as": "_own"
+        }
+      ],
+      "params": [
+        {
+          "name": "hl_sydney",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "fields": [
+              "name"
+            ],
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 1.2,
+        "cursor": "pointer",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              130
+            ],
+            "range": [
+              70,
+              1900
+            ]
+          },
+          "title": "Capacity (MW)",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 10,
+            "values": [
+              20,
+              60,
+              100
+            ]
+          }
+        },
+        "color": {
+          "field": "operator_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Foreign Hyperscaler",
+              "Foreign",
+              "Domestic"
+            ],
+            "range": [
+              "#E0584F",
+              "#F39C42",
+              "#1F8B8A"
+            ]
+          },
+          "title": "Ownership",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 6
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "hl_sydney",
+            "value": 0.95,
+            "empty": true
+          },
+          "value": 0.32
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Facility"
+          },
+          {
+            "field": "operator",
+            "type": "nominal",
+            "title": "Operator"
+          },
+          {
+            "field": "_own",
+            "type": "nominal",
+            "title": "Ownership"
+          },
+          {
+            "field": "suburb",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "capacity_mw",
+            "type": "quantitative",
+            "title": "Capacity (MW)",
+            "format": ".0f"
+          },
+          {
+            "field": "_share",
+            "type": "quantitative",
+            "title": "Share of Sydney (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "year_opened",
+            "type": "quantitative",
+            "title": "Opened",
+            "format": "d"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lat": -33.7865,
+            "lon": 150.828825,
+            "lbl": "Western Sydney corridor",
+            "mwlbl": "385 MW",
+            "dx": -8,
+            "dy": 0,
+            "al": "end",
+            "dy_mw": 11
+          },
+          {
+            "lat": -33.7745,
+            "lon": 151.1171,
+            "lbl": "Macquarie Park",
+            "mwlbl": "141 MW",
+            "dx": 0,
+            "dy": -18,
+            "al": "middle",
+            "dy_mw": -5
+          },
+          {
+            "lat": -33.818,
+            "lon": 151.1695,
+            "lbl": "Lane Cove",
+            "mwlbl": "124 MW",
+            "dx": 16,
+            "dy": 8,
+            "al": "start",
+            "dy_mw": 7
+          },
+          {
+            "lat": -33.809,
+            "lon": 151.183,
+            "lbl": "Artarmon",
+            "mwlbl": "80 MW",
+            "dx": 16,
+            "dy": -8,
+            "al": "start",
+            "dy_mw": 23
+          },
+          {
+            "lat": -33.8499,
+            "lon": 151.0328,
+            "lbl": "Auburn",
+            "mwlbl": "64 MW",
+            "dx": 0,
+            "dy": 18,
+            "al": "middle",
+            "dy_mw": 29
+          },
+          {
+            "lat": -33.9301,
+            "lon": 151.1892,
+            "lbl": "Mascot",
+            "mwlbl": "88 MW",
+            "dx": 0,
+            "dy": 22,
+            "al": "middle",
+            "dy_mw": 33
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "fill": "white",
+        "clip": true,
+        "stroke": "white",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        },
+        "dx": {
+          "field": "dx",
+          "type": "quantitative"
+        },
+        "dy": {
+          "field": "dy",
+          "type": "quantitative"
+        },
+        "align": {
+          "field": "al",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lat": -33.7865,
+            "lon": 150.828825,
+            "lbl": "Western Sydney corridor",
+            "mwlbl": "385 MW",
+            "dx": -8,
+            "dy": 0,
+            "al": "end",
+            "dy_mw": 11
+          },
+          {
+            "lat": -33.7745,
+            "lon": 151.1171,
+            "lbl": "Macquarie Park",
+            "mwlbl": "141 MW",
+            "dx": 0,
+            "dy": -18,
+            "al": "middle",
+            "dy_mw": -5
+          },
+          {
+            "lat": -33.818,
+            "lon": 151.1695,
+            "lbl": "Lane Cove",
+            "mwlbl": "124 MW",
+            "dx": 16,
+            "dy": 8,
+            "al": "start",
+            "dy_mw": 7
+          },
+          {
+            "lat": -33.809,
+            "lon": 151.183,
+            "lbl": "Artarmon",
+            "mwlbl": "80 MW",
+            "dx": 16,
+            "dy": -8,
+            "al": "start",
+            "dy_mw": 23
+          },
+          {
+            "lat": -33.8499,
+            "lon": 151.0328,
+            "lbl": "Auburn",
+            "mwlbl": "64 MW",
+            "dx": 0,
+            "dy": 18,
+            "al": "middle",
+            "dy_mw": 29
+          },
+          {
+            "lat": -33.9301,
+            "lon": 151.1892,
+            "lbl": "Mascot",
+            "mwlbl": "88 MW",
+            "dx": 0,
+            "dy": 22,
+            "al": "middle",
+            "dy_mw": 33
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "fill": "#161616",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        },
+        "dx": {
+          "field": "dx",
+          "type": "quantitative"
+        },
+        "dy": {
+          "field": "dy",
+          "type": "quantitative"
+        },
+        "align": {
+          "field": "al",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "scale": 34000,
+    "center": [
+      151.0,
+      -33.85
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+cable_id,name,year_active,capacity_tbps,consortium,landing_city,landing_lat,landing_lon,connects_to
+SX,Southern Cross Cable,2000,5.0,Southern Cross Cables,Sydney,-33.77,151.28,"USA, NZ, Fiji, Hawaii"
+SXNEXT,Southern Cross NEXT,2022,72.0,Southern Cross Cables,Sydney,-33.89,151.2,"USA, NZ, Kiribati, Tokelau"
+AJC,Australia-Japan Cable,2001,2.5,"AJC (Telstra, NTT, others)",Sydney,-33.9,151.27,"Japan, Guam"
+TELE,Telstra Endeavour,2008,1.28,Telstra,Sydney,-33.9,151.27,"Hawaii, USA"
+PPC1,PIPE Pacific Cable (PPC-1),2009,2.56,TPG Telecom,Sydney,-33.74,151.29,"Guam, USA"
+ASC,Australia Singapore Cable,2018,60.0,Vocus,Perth,-31.95,115.86,"Singapore, Indonesia, Christmas Island"
+INDIGOW,INDIGO West,2019,36.0,"AARNet, Google, Singtel, Telstra, SubPartners",Perth,-31.95,115.86,"Singapore, Indonesia"
+INDIGOC,INDIGO Central,2019,36.0,"AARNet, Google, Singtel, Telstra, SubPartners",Sydney,-33.74,151.11,Perth
+JGAS,JGA South,2020,36.0,"AARNet, Google, RTI",Sydney,-33.89,151.28,"Guam, Sunshine Coast"
+CS2,Coral Sea Cable System,2019,20.0,Australian Government,Sydney,-33.9,151.27,"PNG, Solomon Islands"
+HAWAIKI,Hawaiki Cable,2018,30.0,BW Digital,Sydney,-33.74,151.29,"USA, NZ, American Samoa, Hawaii"
+TGA,Tasman Global Access,2017,20.0,"Telstra, Spark, Vodafone",Sydney,-33.89,151.2,New Zealand
+SMW3,SEA-ME-WE 3,2000,0.48,International consortium,Perth,-31.95,115.86,"Singapore, Asia, Europe"
+OAC,Oman Australia Cable,2022,39.0,SUBCO,Perth,-31.95,115.86,"Oman, Djibouti"
+ACC1,Asia Connect Cable (ACC-1),2025,100.0,"SUBCO, Gulf Bridge",Darwin,-12.46,130.85,"Singapore, Indonesia, Philippines, Guam, USA"

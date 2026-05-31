@@ -1,0 +1,301 @@
+{
+  "width": 620,
+  "height": 440,
+  "title": {
+    "text": "Cable landings and the data centre clusters they feed",
+    "subtitle": "Red dots are cable landings. Teal circles are DC clusters, sized by capacity."
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E9ECEE",
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "graticule": {
+          "step": [
+            10,
+            10
+          ]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#D8DAD6",
+        "strokeWidth": 0.4,
+        "strokeOpacity": 0.85,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#C9C3B5",
+        "strokeWidth": 0.5,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/cable_to_cluster.json"
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#9AA0A0",
+        "opacity": 0.4,
+        "strokeWidth": 1.5,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "landing_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "landing_lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "cluster_lon"
+        },
+        "latitude2": {
+          "field": "cluster_lat"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/dc_clusters.json"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#33332F",
+        "stroke": "white",
+        "strokeWidth": 1,
+        "opacity": 0.85,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              100,
+              2500
+            ]
+          },
+          "title": "Cluster MW",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 4
+          }
+        },
+        "tooltip": [
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "Cluster"
+          },
+          {
+            "field": "capacity_mw",
+            "type": "quantitative",
+            "title": "Capacity (MW)",
+            "format": ".0f"
+          },
+          {
+            "field": "facilities",
+            "type": "quantitative",
+            "title": "Facilities"
+          },
+          {
+            "field": "operators",
+            "type": "quantitative",
+            "title": "Operators"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.87,
+            "lon": 151.21,
+            "is_landing": true
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 115.86,
+            "is_landing": true
+          },
+          {
+            "city": "Darwin",
+            "lat": -12.46,
+            "lon": 130.85,
+            "is_landing": true
+          }
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 120,
+        "color": "#2E6FB0",
+        "stroke": "white",
+        "strokeWidth": 1.5,
+        "opacity": 1,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "Cable landing"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.87,
+            "lon": 151.21
+          },
+          {
+            "city": "Melbourne",
+            "lat": -37.81,
+            "lon": 144.96
+          },
+          {
+            "city": "Brisbane",
+            "lat": -27.47,
+            "lon": 153.03
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 115.86
+          },
+          {
+            "city": "Darwin",
+            "lat": -12.46,
+            "lon": 130.85
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "color": "#1A1A1A",
+        "dy": -18,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "city",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "scale": 600,
+    "center": [
+      134,
+      -25.5
+    ]
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#6B6B68",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#1A1A1A",
+      "titleFontWeight": 500,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "axisX": {
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 500,
+      "padding": 0,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1A1A1A",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#6B6B68"
+    }
+  }
+}

@@ -1,0 +1,555 @@
+[
+  {
+    "sa4_name": "Sydney - Inner City",
+    "state": "NSW",
+    "population": 314800,
+    "capacity_mw": 683.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - North Sydney and Hornsby",
+    "state": "NSW",
+    "population": 488600,
+    "capacity_mw": 683.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Northern Beaches",
+    "state": "NSW",
+    "population": 271700,
+    "capacity_mw": 619.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Parramatta",
+    "state": "NSW",
+    "population": 442000,
+    "capacity_mw": 1068.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Ryde",
+    "state": "NSW",
+    "population": 196200,
+    "capacity_mw": 983.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - South West",
+    "state": "NSW",
+    "population": 414300,
+    "capacity_mw": 479.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Sutherland",
+    "state": "NSW",
+    "population": 234900,
+    "capacity_mw": 304.7,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Inner West",
+    "state": "NSW",
+    "population": 313700,
+    "capacity_mw": 683.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Eastern Suburbs",
+    "state": "NSW",
+    "population": 308500,
+    "capacity_mw": 683.2,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Outer South West",
+    "state": "NSW",
+    "population": 350800,
+    "capacity_mw": 85.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sydney - Outer West and Blue Mountains",
+    "state": "NSW",
+    "population": 309200,
+    "capacity_mw": 385.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Central Coast",
+    "state": "NSW",
+    "population": 348200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Newcastle and Lake Macquarie",
+    "state": "NSW",
+    "population": 392200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Illawarra",
+    "state": "NSW",
+    "population": 309700,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Mid North Coast",
+    "state": "NSW",
+    "population": 226300,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "New England and North West",
+    "state": "NSW",
+    "population": 188800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Richmond - Tweed",
+    "state": "NSW",
+    "population": 252600,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Coffs Harbour - Grafton",
+    "state": "NSW",
+    "population": 142500,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Far West and Orana",
+    "state": "NSW",
+    "population": 124800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Melbourne - Inner",
+    "state": "VIC",
+    "population": 327600,
+    "capacity_mw": 457.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Melbourne - Inner East",
+    "state": "VIC",
+    "population": 411200,
+    "capacity_mw": 294.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Melbourne - Inner South",
+    "state": "VIC",
+    "population": 469300,
+    "capacity_mw": 234.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Melbourne - North East",
+    "state": "VIC",
+    "population": 591600,
+    "capacity_mw": 237.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Melbourne - North West",
+    "state": "VIC",
+    "population": 460900,
+    "capacity_mw": 457.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Melbourne - Outer East",
+    "state": "VIC",
+    "population": 481300,
+    "capacity_mw": 18.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Melbourne - South East",
+    "state": "VIC",
+    "population": 802100,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Melbourne - West",
+    "state": "VIC",
+    "population": 1018200,
+    "capacity_mw": 439.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Mornington Peninsula",
+    "state": "VIC",
+    "population": 173700,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Ballarat",
+    "state": "VIC",
+    "population": 122100,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Bendigo",
+    "state": "VIC",
+    "population": 165400,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Geelong",
+    "state": "VIC",
+    "population": 312900,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Hume",
+    "state": "VIC",
+    "population": 174200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Latrobe - Gippsland",
+    "state": "VIC",
+    "population": 287000,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Shepparton",
+    "state": "VIC",
+    "population": 67800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Warrnambool and South West",
+    "state": "VIC",
+    "population": 109800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Brisbane - East",
+    "state": "QLD",
+    "population": 256800,
+    "capacity_mw": 41.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Brisbane - North",
+    "state": "QLD",
+    "population": 230400,
+    "capacity_mw": 41.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Brisbane - South",
+    "state": "QLD",
+    "population": 379900,
+    "capacity_mw": 59.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Brisbane - West",
+    "state": "QLD",
+    "population": 187600,
+    "capacity_mw": 59.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Brisbane Inner City",
+    "state": "QLD",
+    "population": 311100,
+    "capacity_mw": 59.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Gold Coast",
+    "state": "QLD",
+    "population": 668200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Ipswich",
+    "state": "QLD",
+    "population": 386500,
+    "capacity_mw": 18.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Logan - Beaudesert",
+    "state": "QLD",
+    "population": 367600,
+    "capacity_mw": 18.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Moreton Bay - North",
+    "state": "QLD",
+    "population": 240200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Moreton Bay - South",
+    "state": "QLD",
+    "population": 246600,
+    "capacity_mw": 41.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Sunshine Coast",
+    "state": "QLD",
+    "population": 387800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Toowoomba",
+    "state": "QLD",
+    "population": 175200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Wide Bay",
+    "state": "QLD",
+    "population": 311700,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Mackay - Isaac - Whitsunday",
+    "state": "QLD",
+    "population": 184400,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Townsville",
+    "state": "QLD",
+    "population": 232700,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Cairns",
+    "state": "QLD",
+    "population": 257400,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Queensland - Outback",
+    "state": "QLD",
+    "population": 80100,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Central Queensland",
+    "state": "QLD",
+    "population": 234300,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Darling Downs - Maranoa",
+    "state": "QLD",
+    "population": 134500,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Fitzroy",
+    "state": "QLD",
+    "population": 232800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Perth - Inner",
+    "state": "WA",
+    "population": 130100,
+    "capacity_mw": 24.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Perth - North East",
+    "state": "WA",
+    "population": 235300,
+    "capacity_mw": 24.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Perth - North West",
+    "state": "WA",
+    "population": 612300,
+    "capacity_mw": 24.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Perth - South East",
+    "state": "WA",
+    "population": 451400,
+    "capacity_mw": 15.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Perth - South West",
+    "state": "WA",
+    "population": 408400,
+    "capacity_mw": 39.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Mandurah",
+    "state": "WA",
+    "population": 96100,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Bunbury",
+    "state": "WA",
+    "population": 199600,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Western Australia - Outback (North)",
+    "state": "WA",
+    "population": 92500,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Western Australia - Outback (South)",
+    "state": "WA",
+    "population": 91800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Western Australia - Wheat Belt",
+    "state": "WA",
+    "population": 76200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Adelaide - Central and Hills",
+    "state": "SA",
+    "population": 281200,
+    "capacity_mw": 9.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Adelaide - North",
+    "state": "SA",
+    "population": 433500,
+    "capacity_mw": 9.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Adelaide - South",
+    "state": "SA",
+    "population": 374600,
+    "capacity_mw": 9.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Adelaide - West",
+    "state": "SA",
+    "population": 250200,
+    "capacity_mw": 9.0,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Barossa - Yorke - Mid North",
+    "state": "SA",
+    "population": 119800,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "South Australia - Outback",
+    "state": "SA",
+    "population": 76500,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "South Australia - South East",
+    "state": "SA",
+    "population": 124900,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Hobart",
+    "state": "TAS",
+    "population": 247700,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Launceston and North East",
+    "state": "TAS",
+    "population": 145700,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "South East",
+    "state": "TAS",
+    "population": 81100,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "West and North West",
+    "state": "TAS",
+    "population": 110200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Darwin",
+    "state": "NT",
+    "population": 143900,
+    "capacity_mw": 2.5,
+    "has_dc": true
+  },
+  {
+    "sa4_name": "Northern Territory - Outback",
+    "state": "NT",
+    "population": 109200,
+    "capacity_mw": 0,
+    "has_dc": false
+  },
+  {
+    "sa4_name": "Australian Capital Territory",
+    "state": "ACT",
+    "population": 472600,
+    "capacity_mw": 12.0,
+    "has_dc": true
+  }
+]

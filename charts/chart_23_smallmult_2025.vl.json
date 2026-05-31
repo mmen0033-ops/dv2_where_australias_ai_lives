@@ -1,0 +1,131 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 210,
+  "height": 180,
+  "title": {
+    "text": "2025",
+    "subtitle": "51 centres \u00b7 1,648 MW",
+    "anchor": "middle",
+    "fontSize": 15,
+    "subtitleFontSize": 10
+  },
+  "projection": {
+    "type": "mercator",
+    "scale": 175,
+    "center": [
+      134,
+      -27
+    ]
+  },
+  "view": {
+    "fill": "#E9ECEE",
+    "stroke": null
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#D8D4C8",
+        "strokeWidth": 0.5,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/data_centres.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.year_opened <= 2025"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "stroke": "white",
+        "strokeWidth": 0.5,
+        "opacity": 0.75,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              130
+            ],
+            "range": [
+              8,
+              260
+            ]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "operator_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Foreign Hyperscaler",
+              "Foreign",
+              "Domestic"
+            ],
+            "range": [
+              "#E0584F",
+              "#F39C42",
+              "#1F8B8A"
+            ]
+          },
+          "legend": null
+        },
+        "order": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "sort": "descending"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  }
+}

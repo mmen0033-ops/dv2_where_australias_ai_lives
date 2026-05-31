@@ -1,0 +1,614 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 620,
+  "height": 440,
+  "title": {
+    "text": "Where the compute lives, packed so none of it hides",
+    "subtitle": [
+      "A Dorling cartogram: every one of the 51 data centres is a circle, sized by power capacity and",
+      "coloured by ownership, then nudged off its neighbours so none hides behind another while staying",
+      "near its true location. The dense knots over Sydney and Melbourne are the concentration made countable."
+    ],
+    "anchor": "start"
+  },
+  "projection": {
+    "type": "mercator",
+    "scale": 600,
+    "center": [
+      134,
+      -25.5
+    ]
+  },
+  "params": [
+    {
+      "name": "operator_filter",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "Foreign Hyperscaler",
+          "Foreign",
+          "Domestic"
+        ],
+        "name": "Filter by ownership: "
+      }
+    },
+    {
+      "name": "hlState",
+      "value": "All"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E9ECEE",
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "graticule": {
+          "step": [
+            10,
+            10
+          ]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#D8DAD6",
+        "strokeWidth": 0.4,
+        "strokeOpacity": 0.8,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#D8D4C8",
+        "strokeWidth": 0.7,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "st": "NSW",
+            "lat": -32.0,
+            "lon": 147.5
+          },
+          {
+            "st": "VIC",
+            "lat": -37.2,
+            "lon": 143.5
+          },
+          {
+            "st": "QLD",
+            "lat": -22.5,
+            "lon": 145.5
+          },
+          {
+            "st": "WA",
+            "lat": -26.0,
+            "lon": 122.0
+          },
+          {
+            "st": "SA",
+            "lat": -30.0,
+            "lon": 135.5
+          },
+          {
+            "st": "TAS",
+            "lat": -42.0,
+            "lon": 146.5
+          },
+          {
+            "st": "NT",
+            "lat": -19.5,
+            "lon": 133.5
+          },
+          {
+            "st": "ACT",
+            "lat": -35.5,
+            "lon": 149.1
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": 700,
+        "font": "Hanken Grotesk, system-ui, sans-serif",
+        "fill": "#B9B5A9",
+        "opacity": 0.7,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "st",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/dc_dorling.json"
+      },
+      "transform": [
+        {
+          "filter": "operator_filter == 'All' || datum.operator_type == operator_filter"
+        },
+        {
+          "filter": "datum.dist_moved > 6"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "stroke": "#9AA0A0",
+        "strokeWidth": 0.35,
+        "opacity": 0.35,
+        "clip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "anchor_x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              620
+            ],
+            "range": [
+              0,
+              620
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "anchor_y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              440
+            ],
+            "range": [
+              0,
+              440
+            ]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x"
+        },
+        "y2": {
+          "field": "y"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/dc_dorling.json"
+      },
+      "transform": [
+        {
+          "filter": "operator_filter == 'All' || datum.operator_type == operator_filter"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "stroke": "white",
+        "strokeWidth": 1.1,
+        "clip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              620
+            ],
+            "range": [
+              0,
+              620
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              440
+            ],
+            "range": [
+              0,
+              440
+            ]
+          },
+          "axis": null
+        },
+        "size": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              130
+            ],
+            "range": [
+              0,
+              1256.6
+            ]
+          },
+          "title": "Capacity (MW)",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 10,
+            "values": [
+              20,
+              60,
+              100
+            ]
+          }
+        },
+        "color": {
+          "field": "operator_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Foreign Hyperscaler",
+              "Foreign",
+              "Domestic"
+            ],
+            "range": [
+              "#E0584F",
+              "#F39C42",
+              "#1F8B8A"
+            ]
+          },
+          "title": "Ownership",
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 6
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "hlState == 'All' || datum.state == hlState",
+            "value": 0.92
+          },
+          "value": 0.15
+        },
+        "order": {
+          "field": "capacity_mw",
+          "type": "quantitative",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Facility"
+          },
+          {
+            "field": "operator",
+            "title": "Operator"
+          },
+          {
+            "field": "suburb",
+            "title": "Suburb"
+          },
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "capacity_mw",
+            "title": "MW",
+            "format": ".1f"
+          },
+          {
+            "field": "year_opened",
+            "title": "Opened",
+            "format": "d"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.6,
+            "lon": 152.6,
+            "al": "left"
+          },
+          {
+            "city": "Melbourne",
+            "lat": -38.9,
+            "lon": 144.96,
+            "al": "center"
+          },
+          {
+            "city": "Brisbane",
+            "lat": -27.0,
+            "lon": 154.2,
+            "al": "left"
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 114.4,
+            "al": "right"
+          },
+          {
+            "city": "Adelaide",
+            "lat": -34.93,
+            "lon": 136.6,
+            "al": "right"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10.5,
+        "fontWeight": 700,
+        "dy": 0,
+        "align": "center",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 3,
+        "lineJoin": "round",
+        "fill": "#FFFFFF",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "city",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.6,
+            "lon": 152.6,
+            "al": "left"
+          },
+          {
+            "city": "Melbourne",
+            "lat": -38.9,
+            "lon": 144.96,
+            "al": "center"
+          },
+          {
+            "city": "Brisbane",
+            "lat": -27.0,
+            "lon": 154.2,
+            "al": "left"
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 114.4,
+            "al": "right"
+          },
+          {
+            "city": "Adelaide",
+            "lat": -34.93,
+            "lon": 136.6,
+            "al": "right"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10.5,
+        "fontWeight": 700,
+        "dy": 0,
+        "align": "center",
+        "fill": "#23231F",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "city",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 545,
+            "y": 258,
+            "x2": 520,
+            "y2": 300
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#57554C",
+        "strokeWidth": 0.8,
+        "opacity": 0.7,
+        "clip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              620
+            ],
+            "range": [
+              0,
+              620
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              440
+            ],
+            "range": [
+              0,
+              440
+            ]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x2"
+        },
+        "y2": {
+          "field": "y2"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 612,
+            "y": 250,
+            "t": "Sydney + Melbourne:"
+          },
+          {
+            "x": 612,
+            "y": 266,
+            "t": "about 92% of all capacity"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "fontSize": 11.5,
+        "fontWeight": 600,
+        "font": "Hanken Grotesk, system-ui, sans-serif",
+        "fill": "#16150F",
+        "lineHeight": 15,
+        "clip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              620
+            ],
+            "range": [
+              0,
+              620
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              440
+            ],
+            "range": [
+              0,
+              440
+            ]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  }
+}

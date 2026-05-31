@@ -1,0 +1,1003 @@
+[
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 0.8
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 1.1
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 0.7
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Google",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 0.5
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 1.1
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Southern Cross Cable",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 5.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 10.8
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 16.2
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 10.4
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Google",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 3.0
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 7.8
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 2.2
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 16.2
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 1.7
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 1.5
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.9
+  },
+  {
+    "cable_name": "Southern Cross NEXT",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 72.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Google",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Australia-Japan Cable",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 2.5,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Google",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Telstra Endeavour",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 1.28,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Google",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "PIPE Pacific Cable (PPC-1)",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 2.56,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.0
+  },
+  {
+    "cable_name": "Australia Singapore Cable",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 60.0,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 18.5
+  },
+  {
+    "cable_name": "Australia Singapore Cable",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 60.0,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 18.5
+  },
+  {
+    "cable_name": "Australia Singapore Cable",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 60.0,
+    "operator_share_pct": 38.5,
+    "estimated_tbps": 23.1
+  },
+  {
+    "cable_name": "INDIGO West",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 11.1
+  },
+  {
+    "cable_name": "INDIGO West",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 11.1
+  },
+  {
+    "cable_name": "INDIGO West",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 38.5,
+    "estimated_tbps": 13.8
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 5.4
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 8.1
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 5.2
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Google",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 1.5
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 3.9
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 1.1
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 8.1
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.8
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.7
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.5
+  },
+  {
+    "cable_name": "INDIGO Central",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 5.4
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 8.1
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 5.2
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Google",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 1.5
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 3.9
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 1.1
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 8.1
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.8
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.7
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.5
+  },
+  {
+    "cable_name": "JGA South",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 36.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 3.0
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 4.5
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 2.9
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Google",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 0.8
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 2.2
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 4.5
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.5
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "Coral Sea Cable System",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 4.5
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 6.7
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 4.4
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Google",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 1.3
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 3.3
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.9
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 6.7
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.7
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "Hawaiki Cable",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 30.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Equinix",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 15.0,
+    "estimated_tbps": 3.0
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 4.5
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Microsoft",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 14.5,
+    "estimated_tbps": 2.9
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Google",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 4.2,
+    "estimated_tbps": 0.8
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 10.9,
+    "estimated_tbps": 2.2
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Global Switch",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 3.0,
+    "estimated_tbps": 0.6
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "AirTrunk",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 22.5,
+    "estimated_tbps": 4.5
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Macquarie Telecom",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 2.3,
+    "estimated_tbps": 0.5
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 0.5,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Datacom",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 0.8,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 2.1,
+    "estimated_tbps": 0.4
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "Centersquare",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 1.3,
+    "estimated_tbps": 0.3
+  },
+  {
+    "cable_name": "Tasman Global Access",
+    "operator": "ResetData",
+    "cable_capacity_tbps": 20.0,
+    "operator_share_pct": 0.4,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "SEA-ME-WE 3",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 0.48,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "SEA-ME-WE 3",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 0.48,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 0.1
+  },
+  {
+    "cable_name": "SEA-ME-WE 3",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 0.48,
+    "operator_share_pct": 38.5,
+    "estimated_tbps": 0.2
+  },
+  {
+    "cable_name": "Oman Australia Cable",
+    "operator": "NextDC",
+    "cable_capacity_tbps": 39.0,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 12.0
+  },
+  {
+    "cable_name": "Oman Australia Cable",
+    "operator": "DCI Data Centers",
+    "cable_capacity_tbps": 39.0,
+    "operator_share_pct": 30.8,
+    "estimated_tbps": 12.0
+  },
+  {
+    "cable_name": "Oman Australia Cable",
+    "operator": "Amazon AWS",
+    "cable_capacity_tbps": 39.0,
+    "operator_share_pct": 38.5,
+    "estimated_tbps": 15.0
+  },
+  {
+    "cable_name": "Asia Connect Cable (ACC-1)",
+    "operator": "Vocus",
+    "cable_capacity_tbps": 100.0,
+    "operator_share_pct": 100.0,
+    "estimated_tbps": 100.0
+  }
+]

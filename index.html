@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where Australia's AI actually lives</title>
+  <meta name="description" content="A visual investigation of Australia's data centre and submarine cable infrastructure. Where compute capacity sits, who owns it, and what it means for regional access.">
+  <meta name="author" content="Munkh-Ochir Mendbayar">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+/* ====================================================================
+   Design tokens for "Where Australia's AI actually lives"
+   ====================================================================
+   Locked, collision-free colour system. One variable family = one hue.
+   DATA HUES (used only inside charts and their keys):
+   - Ownership (who owns it):  red #E0584F hyperscaler / amber #F39C42
+     other-foreign / teal #1F8B8A Australian. Also the country palette.
+   - Latency penalty:          reserved PURPLE ramp (light = low, dark = high).
+   - Infrastructure you reach:  reserved BLUE ramp (cables, capacity, redundancy).
+   PAGE CHROME is monochrome ink/graphite on warm paper, so colour never
+   competes with data meaning. No green anywhere (red+green is unreadable
+   for colour-blind users and was flagged).
+==================================================================== */
+
+:root {
+  /* Surface */
+  --bg: #FAF8F3;            /* Warm paper page */
+  --bg-card: #FFFFFF;       /* Pure white card surfaces */
+  --bg-section: #F1EEE6;    /* Slightly darker section bands */
+  --bg-dark: #1A1A1A;       /* Dark surface for tooltips/contrast */
+
+  /* Ink */
+  --ink: #16150F;           /* Body text, headings (warm near-black) */
+  --ink-muted: #54524A;     /* Secondary text */
+  --ink-faint: #6E6B61;     /* Tertiary/captions */
+  --graphite: #57554C;      /* Chrome accent (eyebrows, numbers, rules) */
+
+  /* Borders / dividers */
+  --border: #E4E0D5;
+  --border-strong: #D2CDC0;
+
+  /* Data hues (semantic, charts only) */
+  --accent: #E0584F;             /* Hyperscaler / US / concentration */
+  --accent-strong: #C73D33;
+  --accent-soft: #F5D6D3;
+  --secondary: #1F8B8A;          /* Australian / sovereign */
+  --secondary-soft: #C9E5E4;
+  --tertiary: #F39C42;           /* Other foreign */
+  --tertiary-soft: #FBE0C2;
+  --latency: #653A98;            /* Latency penalty (purple) */
+  --infra: #2E6FB0;              /* Infrastructure reach (blue) */
+
+  /* Type scale */
+  --font-sans: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Type sizes, fluid */
+  --type-display: clamp(46px, 6.5vw, 80px);
+  --type-h1: clamp(34px, 4.6vw, 52px);
+  --type-h2: clamp(27px, 3.2vw, 38px);
+  --type-h3: 21px;
+  --type-h4: 17px;
+  --type-lead: clamp(17px, 1.35vw, 19px);
+  --type-body: 16px;
+  --type-small: 13.5px;
+  --type-caption: 12px;
+
+  /* Line heights */
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Page width */
+  --content-max: 820px;
+  --content-narrow: 720px;
+  --gutter: 32px;
+
+  /* Radii */
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --radius-3: 16px;
+
+  /* Shadows */
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-2: 0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.03);
+}
+
+/* ====================================================================
+   Layout, typography, components
+==================================================================== */
+
+
+
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  line-height: var(--leading-relaxed);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  max-width: 100vw;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-kerning: normal;
+}
+
+/* Layout containers */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container-narrow {
+  max-width: var(--content-narrow);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Typography components */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: var(--space-3);
+  display: inline-block;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  font-optical-sizing: auto;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.display__accent {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--type-h1);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-h2);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+  font-optical-sizing: auto;
+}
+
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-size: var(--type-h4);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  color: var(--ink);
+}
+
+p, .body {
+  font-size: var(--type-body);
+  line-height: var(--leading-relaxed);
+  color: var(--ink);
+  max-width: 68ch;
+}
+
+.lead {
+  font-size: var(--type-lead);
+  line-height: var(--leading-relaxed);
+  color: var(--ink);
+  font-weight: 400;
+  max-width: 60ch;
+}
+
+.small {
+  font-size: var(--type-small);
+  color: var(--ink-muted);
+  line-height: var(--leading-normal);
+}
+
+.caption {
+  font-size: var(--type-caption);
+  color: var(--ink-muted);
+  line-height: var(--leading-normal);
+}
+
+.muted { color: var(--ink-muted); }
+.faint { color: var(--ink-faint); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+strong, b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--border-strong);
+}
+
+a:hover { color: var(--ink); text-decoration-color: var(--ink); }
+
+/* HERO */
+.hero {
+  padding: var(--space-9) 0 var(--space-7);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.hero__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin-bottom: var(--space-5);
+}
+
+.hero__deck {
+  font-size: var(--type-lead);
+  color: var(--ink-muted);
+  max-width: 56ch;
+  line-height: var(--leading-relaxed);
+}
+
+.hero__byline {
+  margin-top: var(--space-6);
+  font-size: var(--type-small);
+  color: var(--ink-muted);
+}
+
+/* KPI strip */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  padding: var(--space-7) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: var(--space-7) 0;
+}
+
+.kpi {
+  padding: 0 var(--space-4);
+}
+
+.kpi__value {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.5vw, 52px);
+  font-weight: 700;
+  line-height: 0.95;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.kpi__label {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.45;
+  max-width: 22ch;
+}
+
+/* SECTION */
+.section {
+  padding: var(--space-9) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section__intro {
+  margin-bottom: var(--space-8);
+  max-width: 720px;
+}
+
+.section__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.section__title {
+  margin-bottom: var(--space-4);
+}
+
+.section__lead {
+  font-size: var(--type-lead);
+  color: var(--ink-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 60ch;
+}
+
+/* Chart card */
+.chart {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-1);
+}
+
+.chart__head {
+  margin-bottom: var(--space-4);
+}
+
+.chart__title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+
+.chart__deck {
+  font-size: 14px;
+  color: var(--ink-muted);
+  max-width: 65ch;
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-normal);
+}
+
+.chart__viz {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.chart__viz > div { max-width: 100%; }
+.chart__viz svg { max-width: 100%; height: auto; }
+
+.chart__source {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+/* Bivariate map floating key */
+.chart--bivar { position: relative; }
+.bivar-mapwrap { position: relative; }
+.bivar-mapwrap .chart__viz svg { width: 100%; height: auto; }
+.bivar-key {
+  position: absolute;
+  left: 10px;
+  top: 44px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-1);
+  padding: 10px 11px 8px;
+  box-shadow: var(--shadow-1);
+  z-index: 5;
+  pointer-events: none;
+}
+.bivar-key__cap {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 7px;
+  max-width: 134px;
+  line-height: 1.3;
+}
+.bivar-key__body { display: flex; align-items: stretch; gap: 5px; }
+.bivar-key__yaxis {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 9px;
+  color: var(--ink-muted);
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.bivar-key__col { display: flex; flex-direction: column; }
+.bivar-key__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 17px);
+  grid-template-rows: repeat(3, 17px);
+  gap: 2px;
+}
+.bivar-key__grid i { display: block; }
+.bivar-key__xaxis {
+  font-size: 9px;
+  color: var(--ink-muted);
+  text-align: center;
+  margin-top: 3px;
+  letter-spacing: 0.03em;
+}
+
+/* Metro inset: national "you are here" locator */
+.chart--metro { position: relative; }
+.metro-loc {
+  position: absolute;
+  top: calc(var(--space-6) + 6px);
+  right: calc(var(--space-6) + 6px);
+  width: 96px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-1);
+  padding: 6px 6px 4px;
+  box-shadow: var(--shadow-1);
+  z-index: 5;
+  pointer-events: none;
+}
+.metro-loc__cap {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 3px 1px;
+}
+.metro-loc svg { display: block; width: 100%; height: auto; border-radius: 2px; }
+
+/* Site-wide state highlight bar (sticky) */
+.statehl {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(150%) blur(8px);
+  -webkit-backdrop-filter: saturate(150%) blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.statehl__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 9px var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.statehl__label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.statehl__btns { display: flex; gap: 5px; flex-wrap: wrap; }
+.statehl__btn {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  background: #fff;
+  color: var(--ink-muted);
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.statehl__btn:hover { border-color: #B9B5A9; color: var(--ink); }
+.statehl__btn.is-active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.statehl__status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+@media (max-width: 620px) {
+  .statehl__status { width: 100%; margin-left: 0; }
+  .statehl__label { width: 100%; }
+}
+
+/* Animated build-out: play control */
+.growth-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-3);
+}
+.growth-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+.growth-play:hover { background: #2c2c2c; }
+.growth-play:active { transform: translateY(1px); }
+.growth-play__icon {
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent #fff;
+  transition: none;
+}
+.growth-play.is-playing .growth-play__icon {
+  width: 9px; height: 11px;
+  border: none;
+  background:
+    linear-gradient(#fff, #fff) left / 3px 100% no-repeat,
+    linear-gradient(#fff, #fff) right / 3px 100% no-repeat;
+}
+.growth-controls__hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* Small-multiples row: static companion to the animation. Wraps on narrow screens
+   so the full width is always visible without horizontal scrolling. */
+.smallmult {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+.smallmult__cell {
+  flex: 1 1 180px;
+  max-width: 220px;
+  min-width: 160px;
+}
+.smallmult__cell .chart__viz { width: 100%; }
+.smallmult__cell svg { width: 100%; height: auto; }
+
+/* Single-column layout throughout for consistent sightlines.
+   Charts stack vertically, each at full container width. */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.grid-2-wide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 920px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Pull quote */
+.pull {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  border-left: 3px solid var(--ink);
+  padding-left: var(--space-5);
+  margin: var(--space-7) 0;
+  max-width: 36ch;
+}
+
+/* Section number badge */
+.section-num {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.section-num__digit {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--graphite);
+  font-weight: 500;
+}
+
+/* Footer */
+footer {
+  background: var(--bg-section);
+  padding: var(--space-8) 0;
+  margin-top: var(--space-7);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+  max-width: 800px;
+}
+
+@media (max-width: 720px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+.footer-grid h4 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: var(--space-3);
+}
+
+.footer-grid li {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-2);
+  list-style: none;
+  line-height: 1.5;
+}
+
+.footer-note {
+  font-size: 12px;
+  color: var(--ink-faint);
+  line-height: 1.55;
+  margin-top: var(--space-3);
+  max-width: 62ch;
+}
+
+.footer-grid a {
+  color: var(--ink-muted);
+  text-decoration-color: var(--border-strong);
+}
+
+.footer-grid a:hover {
+  color: var(--ink);
+}
+
+/* Reset Vega tooltip to match design */
+#vg-tooltip-element {
+  font-family: var(--font-sans) !important;
+  font-size: 12px !important;
+  background: var(--bg-dark) !important;
+  color: white !important;
+  border-radius: var(--radius-1) !important;
+  border: none !important;
+  padding: 10px 12px !important;
+  box-shadow: var(--shadow-2) !important;
+  max-width: 280px;
+}
+
+#vg-tooltip-element h2 {
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+  color: white !important;
+}
+
+#vg-tooltip-element td.key {
+  color: rgba(255,255,255,0.65) !important;
+  padding-right: 8px !important;
+}
+
+#vg-tooltip-element td.value {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Note callout */
+.note {
+  background: #F3F1EA;
+  border-left: 3px solid var(--ink);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-1);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: var(--leading-normal);
+  margin: var(--space-5) 0;
+  max-width: 720px;
+}
+
+.note strong { color: var(--ink); }
+
+/* How to read this chart - guidance strip above uncommon charts */
+.howto {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: #F3F1EA;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--graphite);
+  border-radius: var(--radius-1);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.howto__icon {
+  flex-shrink: 0;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  white-space: nowrap;
+  padding-top: 1px;
+}
+
+.howto strong { color: var(--ink); }
+
+/* Accent variant: interaction/linked-control guidance. Differentiated by a
+   solid ink rule and its label text, never by a data hue. */
+.howto--accent {
+  background: #EFEDE6;
+  border-left-color: var(--ink);
+}
+.howto--accent .howto__icon { color: var(--ink); }
+.howto--accent strong { color: var(--ink); }
+
+/* Subhead style: section-internal title */
+.subhead {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+/* Glossary inline term */
+.term {
+  border-bottom: 1px dotted var(--ink-faint);
+  cursor: help;
+}
+
+/* Print */
+@media print {
+  .chart { break-inside: avoid; }
+  .section { break-after: always; }
+}
+
+/* ====================================================================
+   Premium polish
+==================================================================== */
+
+/* Cards: quiet depth, gentle lift on hover */
+.chart {
+  border-radius: 10px;
+  transition: box-shadow 0.28s ease, transform 0.28s ease, border-color 0.28s ease;
+}
+.chart:hover {
+  box-shadow: 0 14px 34px rgba(22,21,15,0.07), 0 3px 8px rgba(22,21,15,0.035);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+/* Hero: a faint, neutral atmosphere for depth (no data hues in chrome) */
+.hero {
+  background:
+    radial-gradient(118% 90% at 88% -20%, rgba(22,21,15,0.035), transparent 60%),
+    linear-gradient(180deg, rgba(22,21,15,0.015), transparent 120px);
+}
+
+/* KPI strip reads as one engraved data plate */
+.kpi { border-left: 1px solid var(--border); }
+.kpi:first-child { border-left: none; padding-left: 0; }
+.kpi__value { font-variant-numeric: lining-nums tabular-nums; }
+@media (max-width: 760px) {
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-6); }
+  .kpi:nth-child(odd) { border-left: none; padding-left: 0; }
+}
+@media (max-width: 430px) {
+  .kpi-strip { grid-template-columns: 1fr; }
+  .kpi { border-left: none; padding-left: 0; }
+}
+
+/* Editorial section marker: a short rule leading the eyebrow */
+.section__eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--graphite);
+  vertical-align: middle;
+  margin-right: 9px;
+  position: relative;
+  top: -2px;
+}
+
+/* Quiet, on-brand selection + focus */
+::selection { background: rgba(22,21,15,0.12); }
+.statehl__btn:focus-visible,
+.growth-play:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Pull quotes in Fraunces feel more editorial with optical sizing */
+.pull { font-optical-sizing: auto; }
+
+  </style>
+
+  <!-- Vega + Vega-Lite + vega-embed (CDN with fallback) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+
+<!-- ====================================================================
+     HERO
+==================================================================== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero__meta">
+      <span>FIT2179 &middot; Data Visualisation 2</span>
+      <span>Semester 1, 2026</span>
+    </div>
+
+    
+    <h1 class="display">Where Australia's<br>AI <span class="display__accent">actually</span> lives.</h1>
+    <p class="hero__deck">Every AI service, video stream and cloud app runs on physical buildings somewhere. This page looks at where those buildings are in Australia, who owns them, how they connect to the rest of the world, and what their location means for users in different parts of the country.</p>
+    <p class="hero__byline">By <strong>Munkh-Ochir Mendbayar</strong>, FIT2179, May 2026</p>
+
+    <!-- KPI strip -->
+    <div class="kpi-strip">
+      <div class="kpi">
+        <div class="kpi__value">1,648 MW</div>
+        <div class="kpi__label">Total commercial data centre capacity in Australia</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__value">72%</div>
+        <div class="kpi__label">Of that capacity is US-owned</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__value">15</div>
+        <div class="kpi__label">Submarine cables connecting us to the rest of the world</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__value">84%</div>
+        <div class="kpi__label">Of Australians live within 15ms of a hyperscaler facility</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Site-wide state highlight: coordinates the hero map, latency map and bivariate map -->
+<div class="statehl" id="state-highlight">
+  <div class="statehl__inner">
+    <span class="statehl__label">Highlight one state across every map below:</span>
+    <div class="statehl__btns">
+      <button class="statehl__btn" type="button" data-state="NSW">NSW</button>
+      <button class="statehl__btn" type="button" data-state="VIC">VIC</button>
+      <button class="statehl__btn" type="button" data-state="QLD">QLD</button>
+      <button class="statehl__btn" type="button" data-state="WA">WA</button>
+      <button class="statehl__btn" type="button" data-state="SA">SA</button>
+      <button class="statehl__btn" type="button" data-state="TAS">TAS</button>
+      <button class="statehl__btn" type="button" data-state="NT">NT</button>
+      <button class="statehl__btn" type="button" data-state="ACT">ACT</button>
+    </div>
+    <span class="statehl__status" id="statehl-status">Showing all states</span>
+  </div>
+</div>
+
+
+<!-- ====================================================================
+     SECTION 1: HOOK
+==================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section__intro">
+      <span class="section__eyebrow">Section 1: The map</span>
+      <h2 class="section__title">Where does the AI you used today actually live?</h2>
+      <p class="section__lead">Australia has 51 commercial data centres of meaningful scale. The map below is a Dorling cartogram: each facility is drawn as a circle sized by its power capacity, sitting near its true location but nudged off its neighbours so that none disappears behind a larger one. Hover any circle for details, or use the dropdown to filter by ownership type.</p>
+    </div>
+
+    <div class="chart">
+      <div class="howto"><span class="howto__icon">How to read</span> <span>Each circle is one data centre, sized by power capacity and coloured by who owns it. This is a <strong>Dorling cartogram</strong>, so the circles are pushed apart until none overlap while each stays close to where the facility really sits. That lets you count and compare the dense Sydney and Melbourne clusters instead of seeing one solid blob. A faint thread runs from any circle that had to move back toward its true spot. <strong>MW (megawatt)</strong> measures electrical power; a large facility draws tens to over a hundred MW.</span></div>
+      <div class="howto howto--accent"><span class="howto__icon">Linked control</span> <span>The state buttons in the bar pinned at the top of the page control this map. Pick a state up there and it stays highlighted here while the rest of the country fades back, and the same selection follows you onto the latency and population maps further down. The status text in that bar always tells you which state you are currently viewing.</span></div>
+      <div class="chart__viz" id="chart-1"></div>
+      <div class="chart__source">A Dorling cartogram of all 51 facilities. Each circle is one data centre, sized by power capacity in MW and coloured by whether the operator is a foreign hyperscaler (red), another foreign company (orange), or Australian owned (teal). Circles are packed apart to remove overlap while staying near their true location; faint threads show how far the busiest clusters had to spread. The dropdown above filters by ownership type. Built on official ABS ASGS 2021 boundaries.</div>
+    </div>
+
+    <p class="lead">Almost all of it sits in two cities. The packed knot of circles over Sydney and Melbourne contrasts with the near-empty rest of the continent, and because the cartogram spreads them apart you can now read each facility on its own rather than guessing at a single dark mass. The size of that knot is the story: dozens of separate circles, most of them red, crowded into two metros while seven states and territories share the rest. We pull those two cities apart for a closer, geographic look in Section 2 below.</p>
+
+    <h3 class="subhead">Watch it happen</h3>
+    <p class="body">Concentration is not a snapshot, it built up over two decades. Press play to watch each facility appear in the year it opened, or drag the slider yourself. The telling part is what does not happen: almost no new dots land outside Sydney and Melbourne, even as the total climbs past fifty.</p>
+
+    <div class="chart chart--anim">
+      <div class="howto"><span class="howto__icon">Try this</span> <span>Press <strong>Play</strong> to animate the build-out from 2002 to today, or drag the slider to any year. The running tally in the top-left updates as facilities appear.</span></div>
+      <div class="growth-controls">
+        <button id="growth-play" class="growth-play" type="button" aria-label="Play">
+          <span class="growth-play__icon" aria-hidden="true"></span>
+          <span class="growth-play__label">Play</span>
+        </button>
+        <span class="growth-controls__hint">then drag the slider below to scrub</span>
+      </div>
+      <div class="chart__viz" id="chart-22"></div>
+      <div class="chart__source">Each dot appears in the year its facility opened, sized by power capacity and coloured by ownership. The dark ring marks facilities that opened in the selected year, drawing the eye to what changed. Year of opening is approximate for a handful of older sites. The build-out is cumulative: once a dot appears it stays.</div>
+    </div>
+
+    <h3 class="subhead">The same story, frozen for comparison</h3>
+    <p class="body">An animation shows motion well, but it asks you to hold each past frame in memory to judge how much really changed, and the eye misses changes that happen away from where it is looking. So the same build-out is laid out below as five fixed snapshots you can compare at a glance, side by side, without relying on memory. Read left to right: the two eastern clusters swell while the rest of the country stays almost bare.</p>
+
+    <div class="chart">
+      <div class="howto howto--accent"><span class="howto__icon">Why both</span> <span>The slider above is a temporal animation, best for feeling the pace of change. These small multiples are the static counterpart, best for precise comparison across years because every frame stays on screen at once. Showing both is a deliberate choice: each idiom answers a question the other cannot.</span></div>
+      <div class="smallmult">
+        <div class="smallmult__cell"><div class="chart__viz" id="chart-23a"></div></div>
+        <div class="smallmult__cell"><div class="chart__viz" id="chart-23b"></div></div>
+        <div class="smallmult__cell"><div class="chart__viz" id="chart-23c"></div></div>
+        <div class="smallmult__cell"><div class="chart__viz" id="chart-23d"></div></div>
+        <div class="smallmult__cell"><div class="chart__viz" id="chart-23e"></div></div>
+      </div>
+      <div class="chart__source">Cumulative build-out at five milestone years, each a small map sharing the same projection, capacity scale, and ownership colours so the panels are directly comparable. Numbers above each panel are the running totals at that year.</div>
+    </div>
+
+    <h3 class="subhead">Explore it yourself</h3>
+    <p class="body">The three panels below are linked. Click any state in the top bar chart and the map and operator list update to show only that state. It is the fastest way to see how lopsided the distribution really is: click NSW and almost everything stays, click anywhere else and the map nearly empties.</p>
+
+    <div class="chart">
+      <div class="howto"><span class="howto__icon">Try this</span> <span>Click a state bar to filter the map and operator list below it. Click the same bar again to clear, or double-click empty space to reset. This is a linked view: one selection drives all three panels at once.</span></div>
+      <div class="chart__viz" id="chart-20"></div>
+      <div class="chart__source">Linked multi-view: the state bar chart drives the facility map and operator breakdown. Selecting a state filters both panels below it.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================================
+     SECTION 2: CLUSTER
+==================================================================== -->
+<section class="section" style="background:var(--bg-section)">
+  <div class="container">
+    <div class="section__intro">
+      <span class="section__eyebrow">Section 2: The cluster</span>
+      <h2 class="section__title">Why almost all of it lives in two cities</h2>
+      <p class="section__lead">Sydney and Melbourne hold 92% of Australia's data centre power. Inside those metros, the concentration goes further. A handful of suburbs do almost all the work.</p>
+    </div>
+
+    <div class="grid-2-wide">
+      <div class="chart">
+        <div class="chart__viz" id="chart-5"></div>
+        <div class="chart__source">Capacity is total nameplate power in MW, summed by state. Source: Cloudscene.</div>
+      </div>
+    </div>
+
+    <p class="pull">Two states host the compute. Five other states pay the bill.</p>
+
+    <div class="grid-2">
+      <div class="chart">
+        <div class="chart__viz" id="chart-7"></div>
+        <div class="chart__source">Bars sorted by total capacity. Colour shows the country where the parent company is based.</div>
+      </div>
+      <div class="chart">
+        <div class="chart__viz" id="chart-8"></div>
+        <div class="chart__source">Each operator's total capacity, shown as a lollipop. The four largest (AWS, AirTrunk, NextDC, Microsoft) hold 74% between them. Hover to highlight one.</div>
+      </div>
+    </div>
+
+    <h3 class="subhead">Inside Sydney and Melbourne</h3>
+    <p class="body">Zooming in shows how local the concentration is. Most of Sydney's hyperscale capacity sits in Macquarie Park, Eastern Creek and Lane Cove West. In Melbourne, the bulk of recent growth has been in Tullamarine and Derrimut.</p>
+    <p class="body">Each zoomed map keeps a small locator beside it showing where that metro sits inside the country. That pairing is deliberate: rather than asking you to remember where Sydney was on the national map above, the locator puts the context right next to the detail, so your eye can read the position instead of your memory having to supply it. The detail view answers where inside the city, and the locator answers where in Australia, at the same glance.</p>
+
+    <div class="grid-2">
+      <div class="chart chart--metro">
+        <div class="chart__viz" id="chart-14"></div>
+        <div class="metro-loc" aria-hidden="false"><p class="metro-loc__cap">Sydney</p><svg viewBox="0 0 120 104" role="img" aria-label="Locator showing Sydney within Australia"><rect width="120" height="104" fill="#E9ECEE"/><path d="M113.9,55.2 L113.3,53.9 L112.8,53.2 L112.7,53.3 L112.6,53.4 L112.6,53.5 L112.6,53.5 L112.4,53.5 L112.4,53.6 L112.4,53.5 L112.6,53.3 L112.8,53.2 L112.8,52.7 L112.8,52.6 L112.7,51.9 L112.9,49.6 L112.4,47.2 L110.5,45.1 L110.3,44.3 L107.7,42.3 L107.8,40.0 L106.3,39.1 L105.3,39.3 L104.1,35.5 L102.9,34.2 L103.1,33.2 L100.6,32.0 L100.2,30.8 L99.4,30.9 L97.9,30.0 L97.4,28.4 L97.0,27.7 L97.2,26.0 L96.4,23.9 L95.6,22.7 L95.5,21.2 L95.5,18.5 L94.0,17.4 L93.5,16.4 L92.3,17.3 L91.4,15.2 L91.2,12.1 L90.4,11.3 L90.6,10.3 L89.8,9.9 L89.7,7.8 L88.9,6.8 L88.3,7.9 L87.8,10.6 L87.0,11.9 L87.7,12.1 L86.7,15.7 L87.2,18.6 L86.7,21.7 L85.3,25.5 L83.5,26.2 L81.7,25.1 L81.3,24.0 L78.9,22.9 L76.6,21.0 L76.1,21.3 L75.0,19.8 L73.3,18.6 L73.1,17.9 L74.2,16.4 L74.3,13.9 L75.5,13.8 L76.6,11.4 L75.4,10.2 L74.5,11.7 L73.0,10.6 L72.3,11.1 L71.3,10.5 L68.1,9.6 L66.2,8.0 L64.9,8.5 L66.5,8.9 L66.9,10.6 L65.6,11.2 L63.8,11.0 L63.0,12.2 L62.4,11.4 L61.5,13.9 L60.7,14.5 L60.3,15.9 L59.5,16.8 L60.5,18.3 L58.7,18.3 L56.8,17.9 L55.0,15.6 L54.1,15.2 L53.4,16.4 L52.4,16.4 L51.8,17.7 L51.3,17.3 L50.1,18.0 L50.6,19.0 L49.5,19.0 L48.5,20.0 L48.4,22.4 L46.9,22.5 L46.4,23.2 L46.6,25.8 L45.5,23.4 L44.7,23.1 L43.3,25.2 L43.7,27.5 L42.4,28.6 L41.9,30.0 L40.7,31.5 L37.5,32.8 L36.5,32.4 L35.9,33.3 L34.4,33.5 L32.6,34.6 L31.5,34.0 L30.0,34.9 L28.3,36.7 L26.5,37.7 L26.0,38.9 L25.4,39.6 L25.0,37.7 L24.2,39.7 L24.6,41.0 L23.8,43.4 L23.7,45.0 L25.6,48.9 L25.2,50.5 L24.1,50.8 L25.4,53.9 L25.4,55.0 L26.4,56.4 L27.3,58.9 L27.3,60.7 L28.5,64.3 L29.0,65.6 L29.0,65.9 L29.0,65.9 L29.3,65.7 L29.3,65.7 L29.2,66.0 L28.9,67.1 L28.9,68.0 L28.8,68.0 L28.7,68.0 L28.8,69.4 L28.0,70.4 L27.3,70.1 L27.3,72.1 L28.6,72.6 L29.6,73.7 L31.2,74.2 L35.0,73.9 L36.0,72.7 L37.2,72.5 L38.6,71.2 L41.6,70.9 L43.2,71.4 L45.3,71.0 L46.5,71.2 L48.0,68.7 L49.2,68.3 L52.4,66.5 L54.7,66.6 L58.7,65.0 L63.5,64.3 L66.1,65.9 L69.1,66.1 L70.6,67.7 L70.7,69.1 L71.8,69.5 L72.8,71.3 L73.1,73.2 L73.7,74.0 L75.3,71.6 L77.1,70.5 L77.7,69.0 L78.7,68.1 L78.8,70.0 L77.9,71.4 L77.7,73.8 L76.7,73.9 L76.3,74.8 L78.2,74.6 L79.1,71.7 L79.9,73.2 L80.2,73.7 L80.1,74.0 L79.9,75.1 L82.5,77.3 L83.0,80.5 L84.9,82.6 L85.6,82.6 L86.9,83.7 L88.8,83.4 L91.4,84.8 L92.3,84.1 L94.0,82.9 L93.7,82.5 L94.4,82.0 L94.6,82.2 L94.9,82.7 L95.2,83.1 L95.8,83.3 L95.6,83.9 L97.7,85.6 L98.0,84.7 L100.2,82.9 L102.2,81.9 L104.7,81.8 L105.8,81.1 L105.7,79.5 L106.7,75.7 L107.2,74.7 L107.5,74.5 L107.7,73.6 L108.3,71.9 L108.2,71.3 L108.5,71.2 L108.7,71.3 L108.8,70.9 L108.7,71.0 L108.5,71.0 L108.3,70.9 L108.3,70.9 L108.5,70.8 L108.6,70.7 L108.9,70.3 L108.5,70.4 L108.4,70.3 L108.3,69.9 L109.6,69.1 L109.5,69.0 L109.3,69.0 L109.7,68.1 L110.0,68.1 L110.1,68.2 L111.0,67.4 L112.5,64.4 L112.7,61.8 L113.4,58.2 L114.0,57.1 L113.9,55.2Z M78.0,75.7 L75.8,76.2 L76.0,77.0 L77.7,77.1 L79.0,76.2 L78.0,75.7Z M101.3,95.6 L102.0,93.1 L102.2,90.8 L101.3,90.1 L98.4,91.1 L97.7,91.3 L93.9,90.0 L94.0,91.4 L95.1,93.4 L95.8,96.3 L96.8,96.8 L97.0,97.9 L99.0,98.0 L99.7,96.6 L101.3,95.6Z" fill="#ECEBE4" stroke="#B9B5A9" stroke-width="0.6"/><circle cx="94.4" cy="81.9" r="2.4" fill="#C9C5B9"/><circle cx="108.1" cy="71.0" r="4.6" fill="none" stroke="#1A1A1A" stroke-width="1.4" opacity="0.55"/><circle cx="108.1" cy="71.0" r="3.4" fill="#1A1A1A" stroke="#fff" stroke-width="1"/></svg></div>
+        <div class="chart__source">Sydney metro view. Most hyperscale capacity is in Macquarie Park, which sits northwest of the harbour. Hover any circle for operator, ownership, capacity and its share of Sydney's total.</div>
+      </div>
+      <div class="chart chart--metro">
+        <div class="chart__viz" id="chart-15"></div>
+        <div class="metro-loc" aria-hidden="false"><p class="metro-loc__cap">Melbourne</p><svg viewBox="0 0 120 104" role="img" aria-label="Locator showing Melbourne within Australia"><rect width="120" height="104" fill="#E9ECEE"/><path d="M113.9,55.2 L113.3,53.9 L112.8,53.2 L112.7,53.3 L112.6,53.4 L112.6,53.5 L112.6,53.5 L112.4,53.5 L112.4,53.6 L112.4,53.5 L112.6,53.3 L112.8,53.2 L112.8,52.7 L112.8,52.6 L112.7,51.9 L112.9,49.6 L112.4,47.2 L110.5,45.1 L110.3,44.3 L107.7,42.3 L107.8,40.0 L106.3,39.1 L105.3,39.3 L104.1,35.5 L102.9,34.2 L103.1,33.2 L100.6,32.0 L100.2,30.8 L99.4,30.9 L97.9,30.0 L97.4,28.4 L97.0,27.7 L97.2,26.0 L96.4,23.9 L95.6,22.7 L95.5,21.2 L95.5,18.5 L94.0,17.4 L93.5,16.4 L92.3,17.3 L91.4,15.2 L91.2,12.1 L90.4,11.3 L90.6,10.3 L89.8,9.9 L89.7,7.8 L88.9,6.8 L88.3,7.9 L87.8,10.6 L87.0,11.9 L87.7,12.1 L86.7,15.7 L87.2,18.6 L86.7,21.7 L85.3,25.5 L83.5,26.2 L81.7,25.1 L81.3,24.0 L78.9,22.9 L76.6,21.0 L76.1,21.3 L75.0,19.8 L73.3,18.6 L73.1,17.9 L74.2,16.4 L74.3,13.9 L75.5,13.8 L76.6,11.4 L75.4,10.2 L74.5,11.7 L73.0,10.6 L72.3,11.1 L71.3,10.5 L68.1,9.6 L66.2,8.0 L64.9,8.5 L66.5,8.9 L66.9,10.6 L65.6,11.2 L63.8,11.0 L63.0,12.2 L62.4,11.4 L61.5,13.9 L60.7,14.5 L60.3,15.9 L59.5,16.8 L60.5,18.3 L58.7,18.3 L56.8,17.9 L55.0,15.6 L54.1,15.2 L53.4,16.4 L52.4,16.4 L51.8,17.7 L51.3,17.3 L50.1,18.0 L50.6,19.0 L49.5,19.0 L48.5,20.0 L48.4,22.4 L46.9,22.5 L46.4,23.2 L46.6,25.8 L45.5,23.4 L44.7,23.1 L43.3,25.2 L43.7,27.5 L42.4,28.6 L41.9,30.0 L40.7,31.5 L37.5,32.8 L36.5,32.4 L35.9,33.3 L34.4,33.5 L32.6,34.6 L31.5,34.0 L30.0,34.9 L28.3,36.7 L26.5,37.7 L26.0,38.9 L25.4,39.6 L25.0,37.7 L24.2,39.7 L24.6,41.0 L23.8,43.4 L23.7,45.0 L25.6,48.9 L25.2,50.5 L24.1,50.8 L25.4,53.9 L25.4,55.0 L26.4,56.4 L27.3,58.9 L27.3,60.7 L28.5,64.3 L29.0,65.6 L29.0,65.9 L29.0,65.9 L29.3,65.7 L29.3,65.7 L29.2,66.0 L28.9,67.1 L28.9,68.0 L28.8,68.0 L28.7,68.0 L28.8,69.4 L28.0,70.4 L27.3,70.1 L27.3,72.1 L28.6,72.6 L29.6,73.7 L31.2,74.2 L35.0,73.9 L36.0,72.7 L37.2,72.5 L38.6,71.2 L41.6,70.9 L43.2,71.4 L45.3,71.0 L46.5,71.2 L48.0,68.7 L49.2,68.3 L52.4,66.5 L54.7,66.6 L58.7,65.0 L63.5,64.3 L66.1,65.9 L69.1,66.1 L70.6,67.7 L70.7,69.1 L71.8,69.5 L72.8,71.3 L73.1,73.2 L73.7,74.0 L75.3,71.6 L77.1,70.5 L77.7,69.0 L78.7,68.1 L78.8,70.0 L77.9,71.4 L77.7,73.8 L76.7,73.9 L76.3,74.8 L78.2,74.6 L79.1,71.7 L79.9,73.2 L80.2,73.7 L80.1,74.0 L79.9,75.1 L82.5,77.3 L83.0,80.5 L84.9,82.6 L85.6,82.6 L86.9,83.7 L88.8,83.4 L91.4,84.8 L92.3,84.1 L94.0,82.9 L93.7,82.5 L94.4,82.0 L94.6,82.2 L94.9,82.7 L95.2,83.1 L95.8,83.3 L95.6,83.9 L97.7,85.6 L98.0,84.7 L100.2,82.9 L102.2,81.9 L104.7,81.8 L105.8,81.1 L105.7,79.5 L106.7,75.7 L107.2,74.7 L107.5,74.5 L107.7,73.6 L108.3,71.9 L108.2,71.3 L108.5,71.2 L108.7,71.3 L108.8,70.9 L108.7,71.0 L108.5,71.0 L108.3,70.9 L108.3,70.9 L108.5,70.8 L108.6,70.7 L108.9,70.3 L108.5,70.4 L108.4,70.3 L108.3,69.9 L109.6,69.1 L109.5,69.0 L109.3,69.0 L109.7,68.1 L110.0,68.1 L110.1,68.2 L111.0,67.4 L112.5,64.4 L112.7,61.8 L113.4,58.2 L114.0,57.1 L113.9,55.2Z M78.0,75.7 L75.8,76.2 L76.0,77.0 L77.7,77.1 L79.0,76.2 L78.0,75.7Z M101.3,95.6 L102.0,93.1 L102.2,90.8 L101.3,90.1 L98.4,91.1 L97.7,91.3 L93.9,90.0 L94.0,91.4 L95.1,93.4 L95.8,96.3 L96.8,96.8 L97.0,97.9 L99.0,98.0 L99.7,96.6 L101.3,95.6Z" fill="#ECEBE4" stroke="#B9B5A9" stroke-width="0.6"/><circle cx="108.1" cy="71.0" r="2.4" fill="#C9C5B9"/><circle cx="94.4" cy="81.9" r="4.6" fill="none" stroke="#1A1A1A" stroke-width="1.4" opacity="0.55"/><circle cx="94.4" cy="81.9" r="3.4" fill="#1A1A1A" stroke="#fff" stroke-width="1"/></svg></div>
+        <div class="chart__source">Melbourne metro view. Tullamarine, near the airport, holds most of the recent hyperscale growth. Hover any circle for operator, ownership, capacity and its share of Melbourne's total.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================================
+     SECTION 3: LIFELINE
+==================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section__intro">
+      <span class="section__eyebrow">Section 3: The cables</span>
+      <h2 class="section__title">How data physically gets in and out of the country</h2>
+      <p class="section__lead">Australia is an island, so every byte going overseas travels through undersea fibre cables. This dataset tracks the fourteen major international cables that carry the bulk of that traffic (a fifteenth runs domestically, linking Sydney and Perth), and every one of the international cables lands at just three cities: Sydney, Perth and Darwin. Sydney alone takes nine of the fourteen. A handful of smaller cables land elsewhere, notably a newer hub on the Sunshine Coast, but the heavy capacity stays concentrated in these three points.</p>
+    </div>
+
+    <div class="chart">
+      <div class="howto"><span class="howto__icon">How to read</span> <span>Each line is a submarine cable running from an Australian city to another country. Thicker lines carry more data. Darker lines are newer. <strong>Tbps (terabits per second)</strong> measures how much data a cable can carry at once; one Tbps is roughly 1,000 home internet connections at full speed.</span></div>
+      <div class="chart__viz" id="chart-2"></div>
+      <div class="chart__source">Mercator projection centred on the Asia-Pacific. Line width shows cable capacity in terabits per second. Darker blue shows newer cables.</div>
+    </div>
+
+    <div class="note">
+      <strong>Why this matters:</strong> Undersea cables carry the international internet between countries. If a cable breaks (from ship anchors, earthquakes, or other damage), traffic has to reroute through the remaining cables. Australia has 15 of them, which sounds like a lot, but they all funnel through the same three landing points.
+    </div>
+
+    <h3 class="subhead">From the seabed to the server room</h3>
+    <p class="body">Cables don't stop at the beach. After landing, they have to physically connect to a data centre, and most of that bandwidth ends up at the hyperscaler facilities sitting closest to the landing stations.</p>
+
+    <div class="chart">
+      <div class="howto"><span class="howto__icon">How to read</span> <span>Blue dots are where cables come ashore. Dark circles are clusters of data centres, sized by total capacity. A grey line connects a landing to any data centre cluster within 50km, showing which clusters sit close enough to use that landing easily.</span></div>
+      <div class="chart__viz" id="chart-11"></div>
+      <div class="chart__source">Cable landings are blue dots. Data centre clusters are dark circles, sized by total MW. Grey lines connect each landing to data centre clusters within 50km.</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart">
+        <div class="chart__viz" id="chart-16"></div>
+        <div class="chart__source">Colour shows how many submarine cables land at each region's nearest international gateway, shaded on an ordered light-to-dark scale so darker always means better connected. This is a count per region rather than a raw national total, so a large remote region does not look well served simply because it is big. Regions near Darwin depend on as few as two cables.</div>
+      </div>
+      <div class="chart">
+        <div class="chart__viz" id="chart-17"></div>
+        <div class="chart__source">Each cell shows that a country's firms participate in that cable's consortium. US-based companies appear most often.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================================
+     SECTION 4: THE TAX
+==================================================================== -->
+<section class="section" style="background:var(--bg-section)">
+  <div class="container">
+    <div class="section__intro">
+      <span class="section__eyebrow">Section 4: The latency tax</span>
+      <h2 class="section__title">What this means if you live outside Sydney or Melbourne</h2>
+      <p class="section__lead">Concentrating data centres in two cities creates a hidden tax for everyone else, measured in milliseconds. Every kilometre between you and the nearest hyperscaler adds a small amount of delay to every request you make. For loading a webpage you probably won't notice. For real-time AI, online gaming and video calls, you will.</p>
+    </div>
+
+    <div class="note">
+      <strong>What is latency?</strong> The time for a signal to travel to a server and back, measured in <span class="term">milliseconds</span> (thousandths of a second). Light in fibre travels at about two-thirds the speed of light in a vacuum, and real cables wind along trunk routes rather than going in a straight line, so the calculation here multiplies the great-circle distance by a routing factor between 1.4 and 2.5 depending on how far the signal has to travel.
+    </div>
+
+    <div class="chart">
+      <div class="chart__viz" id="chart-3"></div>
+      <div class="chart__source">Each shaded area is an ABS SA4 statistical region. Colour shows round-trip latency in milliseconds to the nearest hyperscale data centre. Regions without a measured value in the source dataset are estimated from great-circle distance using the same routing model.</div>
+    </div>
+
+    <div class="chart chart--bivar">
+      <div class="bivar-mapwrap">
+        <div class="chart__viz" id="chart-21"></div>
+        <div class="bivar-key" aria-hidden="true">
+          <div class="bivar-key__cap">Two measures at once</div>
+          <div class="bivar-key__body">
+            <div class="bivar-key__yaxis">Latency &rarr;</div>
+            <div class="bivar-key__col">
+              <div class="bivar-key__grid">
+                <i style="background:#9B5FB8"></i><i style="background:#7858AE"></i><i style="background:#4A2E86"></i>
+                <i style="background:#D2B6DD"></i><i style="background:#ABA8CE"></i><i style="background:#7385BC"></i>
+                <i style="background:#ECEAF2"></i><i style="background:#C5D6EC"></i><i style="background:#7FB0DC"></i>
+              </div>
+              <div class="bivar-key__xaxis">Population &rarr;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chart__source">A bivariate choropleth: each region is classified into one of nine cells by combining round-trip latency with population, each split into low, medium and high thirds. The darkest regions are the ones where high latency and high population overlap, so the greatest number of people experience the worst connectivity. Built on official ABS ASGS 2021 SA4 boundaries.</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart">
+        <div class="chart__viz" id="chart-9"></div>
+        <div class="chart__source">Each line runs from Sydney's 6.2ms baseline to the city's actual latency. The longer the line, the bigger the penalty for being far from a hyperscaler.</div>
+      </div>
+      <div class="chart">
+        <div class="chart__viz" id="chart-4"></div>
+        <div class="chart__source">Capacity per 100,000 residents, by state, rather than raw megawatts. Normalising by population is deliberate: a raw total would simply track where people live and let the largest states dominate by size alone, so this map instead asks how much capacity each resident effectively has nearby. New South Wales has about 12.6 MW per 100,000 people; South Australia has about 0.5. Population from ABS Regional Population, June 2024.</div>
+      </div>
+    </div>
+
+    <div class="chart">
+      <div class="chart__viz" id="chart-18"></div>
+      <div class="chart__source">Each row is a latency range and the kinds of tasks it supports well. Bar width shows the share of Australia's population in that range.</div>
+    </div>
+
+    <div class="chart">
+      <div class="howto"><span class="howto__icon">How to read</span> <span>Each dot is a region, placed left to right by population (a <strong>log scale</strong>, so each step right is about ten times more people). The top row holds regions that have a local data centre, sized by how much. The bottom row holds the 42 of 79 regions with none. Hover any dot for details.</span></div>
+      <div class="chart__viz" id="chart-10"></div>
+      <div class="chart__source">Each dot is an SA4 region. Population is on a log scale. Local capacity counts MW within 25km of the region centroid. 42 of 79 regions have zero, shown in the bottom row.</div>
+    </div>
+
+    <p class="pull">The further you live from a hyperscaler, the slower your AI feels.</p>
+  </div>
+</section>
+
+
+<!-- ====================================================================
+     SECTION 5: VERDICT
+==================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section__intro">
+      <span class="section__eyebrow">Section 5: Where this leaves us</span>
+      <h2 class="section__title">Where Australia stands, and what is at stake</h2>
+      <p class="section__lead">Australia has built a significant data centre footprint over the past two decades. But that footprint is mostly owned by overseas companies, concentrated in two cities, and connected to the world by just three cable landings. Each of those facts is a choice that could have gone differently.</p>
+    </div>
+
+    <div class="chart">
+      <div class="chart__viz" id="chart-6"></div>
+      <div class="chart__source">Cumulative MW installed since 2002. Labels mark when each major hyperscaler opened its first Australian region.</div>
+    </div>
+
+    <div class="grid-2-wide">
+      <div class="chart">
+        <div class="howto"><span class="howto__icon">How to read</span> <span>Each row is one cable; its length is the total capacity it carries. Each segment is the share flowing to one nearby operator, coloured by who owns that operator: <strong>red</strong> for US hyperscalers, <strong>amber</strong> for other foreign firms, <strong>teal</strong> for Australian. The more red in a bar, the more of that cable's bandwidth lands with a US-owned operator. Hover any segment for the operator and its exact share, or use the dropdown below the chart to highlight one operator across every cable.</span></div>
+        <div class="chart__viz" id="chart-19"></div>
+        <div class="chart__source">For each cable, the bar shows how its bandwidth divides among nearby operators, weighted by each operator's share of data centre capacity near the landing point.</div>
+      </div>
+    </div>
+
+    <p class="pull">Australia has the compute. It just doesn't own most of it, and doesn't share it evenly.</p>
+
+    <p class="body">The same pattern repeats at every scale, and the numbers are stark. Two states, New South Wales and Victoria, hold roughly 93 percent of national capacity, leaving the other five states and both territories to split what remains. Five operators control 85 percent of the market, and companies based in the United States own around 72 percent of all capacity while Australian firms hold just 20. Every major international cable surfaces at one of three cities, and Sydney alone takes nine of the fourteen. Each of these layers stacks the same way: a small set of places, firms, and chokepoints carries a service the entire country now depends on, so a single fault in the wrong spot, whether a cut cable off Sydney or an outage at one operator, reaches far beyond the city it happens in.</p>
+
+    <p class="body">None of this is an accident or a failure of planning. Capacity follows population, fibre, cheap power, and existing networks, so it pools where those already exist. The map simply makes the cost of that logic visible: the regions that host the least are also the ones that wait longest for a response from the nearest hyperscaler, and the parts of the country with the fewest cables are the ones a single break can isolate.</p>
+  </div>
+</section>
+
+
+<!-- ====================================================================
+     FOOTER
+==================================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Data sources</h4>
+        <ul>
+          <li><strong>Cloudscene:</strong> Australian commercial data centre inventory, 51 facilities with location, operator, ownership, power capacity and year opened. <a href="https://cloudscene.com">cloudscene.com</a></li>
+          <li><strong>TeleGeography Submarine Cable Map:</strong> the 14 major international cables serving Australia, with landing points, capacity and consortium. <a href="https://submarinecablemap.com">submarinecablemap.com</a></li>
+          <li><strong>Australian Bureau of Statistics:</strong> Regional Population by Statistical Area Level 4, June 2024, used to normalise capacity per resident. <a href="https://www.abs.gov.au/statistics/people/population/regional-population/latest-release">abs.gov.au/statistics/people/population/regional-population</a></li>
+          <li><strong>ABS ASGS 2021 boundaries:</strong> official Statistical Area Level 4 and state boundaries (TopoJSON) for every map. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3">abs.gov.au/statistics/standards/asgs</a></li>
+        </ul>
+        <p class="footer-note">This visualisation combines the data centre inventory with ABS population and boundary data. Latency values for regions absent from the source were derived from great-circle distance to the nearest facility, and the Dorling cartogram positions were derived with a force simulation; both derivations are described where they appear.</p>
+      </div>
+      <div>
+        <h4>Authorship and use</h4>
+        <ul>
+          <li><strong>Munkh-Ochir Mendbayar</strong></li>
+          <li>Student ID 36564818</li>
+          <li>FIT2179 Data Visualisation, Semester 1 2026</li>
+          <li>Monash University, Clayton</li>
+          <li>Published May 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================================================
+     CHART EMBEDS
+==================================================================== -->
+<script>
+  // Embed config shared by all charts
+  const embedConfig = {
+    actions: false,
+    renderer: 'svg',
+    config: {}
+  };
+
+  // Map of DOM ID -> chart JSON path
+  const charts = {
+    'chart-1':  'charts/chart_01_hero_map.vl.json',
+    'chart-22': 'charts/chart_22_growth_animation.vl.json',
+    'chart-20': 'charts/chart_20_coordinated.vl.json',
+    'chart-2':  'charts/chart_02_cable_arcs.vl.json',
+    'chart-3':  'charts/chart_03_latency_choropleth.vl.json',
+    'chart-21': 'charts/chart_21_bivariate_choropleth.vl.json',
+    'chart-4':  'charts/chart_04_percapita_choropleth.vl.json',
+    'chart-5':  'charts/chart_05_state_stacked.vl.json',
+    'chart-6':  'charts/chart_06_capacity_time.vl.json',
+    'chart-7':  'charts/chart_07_ownership_bars.vl.json',
+    'chart-8':  'charts/chart_08_top_operators.vl.json',
+    'chart-9':  'charts/chart_09_latency_small_multiples.vl.json',
+    'chart-10': 'charts/chart_10_capacity_population_scatter.vl.json',
+    'chart-11': 'charts/chart_11_cable_to_dc_flow.vl.json',
+    'chart-14': 'charts/chart_14_sydney_zoom.vl.json',
+    'chart-15': 'charts/chart_15_melbourne_zoom.vl.json',
+    'chart-16': 'charts/chart_16_redundancy_map.vl.json',
+    'chart-17': 'charts/chart_17_consortium_heatmap.vl.json',
+    'chart-18': 'charts/chart_18_latency_tier_reference.vl.json',
+    'chart-19': 'charts/chart_19_cable_operator_sankey.vl.json',
+    'chart-23a': 'charts/chart_23_smallmult_2008.vl.json',
+    'chart-23b': 'charts/chart_23_smallmult_2013.vl.json',
+    'chart-23c': 'charts/chart_23_smallmult_2018.vl.json',
+    'chart-23d': 'charts/chart_23_smallmult_2022.vl.json',
+    'chart-23e': 'charts/chart_23_smallmult_2025.vl.json',
+  };
+
+  // Embed each chart, capturing views for any that need post-embed wiring
+  const views = {};
+  let activeHl = 'All';                       // current site-wide state highlight
+  const HL_TARGETS = ['chart-1', 'chart-3', 'chart-21'];
+  Object.entries(charts).forEach(([id, path]) => {
+    vegaEmbed('#' + id, path, embedConfig).then(result => {
+      views[id] = result.view;
+      if (id === 'chart-22') wireGrowthAnimation(result.view);
+      // if a highlight is already active, apply it to this freshly-loaded map
+      if (activeHl !== 'All' && HL_TARGETS.includes(id)) {
+        try { result.view.signal('hlState', activeHl).runAsync(); } catch (e) {}
+      }
+    }).catch(err => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.innerHTML = `<div style="padding:20px;background:#FEF1F0;border-radius:4px;color:#C73D33;font-size:13px;">
+          Chart failed to load: ${path}<br>Error: ${err.message}
+        </div>`;
+      }
+      console.error('Chart load error:', id, path, err);
+    });
+  });
+
+  // Site-wide state highlight: one set of buttons dims every map to a single state
+  // at once. Maps still work on their own; this only changes opacity, never hides data.
+  function wireStateHighlight() {
+    const bar = document.getElementById('state-highlight');
+    if (!bar) return;
+    const buttons = Array.from(bar.querySelectorAll('.statehl__btn'));
+    const apply = state => {
+      activeHl = state;
+      HL_TARGETS.forEach(id => {
+        const v = views[id];
+        if (v) { try { v.signal('hlState', state).runAsync(); } catch (e) {} }
+      });
+      buttons.forEach(b => b.classList.toggle('is-active', b.dataset.state === state));
+      const status = document.getElementById('statehl-status');
+      if (status) status.textContent = state === 'All'
+        ? 'Showing all states'
+        : 'Highlighting ' + state + ' across the maps below';
+    };
+    buttons.forEach(b => b.addEventListener('click', () => {
+      apply(activeHl === b.dataset.state ? 'All' : b.dataset.state);
+    }));
+  }
+  wireStateHighlight();
+
+
+  // Play control for the year-by-year build-out animation.
+  // The chart works on its own via the slider; this just advances it over time.
+  function wireGrowthAnimation(view) {
+    const btn = document.getElementById('growth-play');
+    if (!btn) return;
+    const MIN = 2002, MAX = 2025, STEP_MS = 480;
+    let timer = null;
+    const setYear = y => { view.signal('yr', y).runAsync(); };
+    const stop = () => { clearInterval(timer); timer = null; btn.classList.remove('is-playing'); btn.setAttribute('aria-label', 'Play'); btn.querySelector('.growth-play__label').textContent = 'Play'; };
+    const start = () => {
+      let y = view.signal('yr');
+      if (y >= MAX) { y = MIN; setYear(y); }   // restart from the beginning
+      btn.classList.add('is-playing');
+      btn.setAttribute('aria-label', 'Pause');
+      btn.querySelector('.growth-play__label').textContent = 'Pause';
+      timer = setInterval(() => {
+        y = view.signal('yr') + 1;
+        if (y > MAX) { setYear(MAX); stop(); return; }
+        setYear(y);
+      }, STEP_MS);
+    };
+    btn.addEventListener('click', () => { timer ? stop() : start(); });
+  }
+
+</script>
+
+</body>
+</html>

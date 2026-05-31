@@ -1,0 +1,550 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 560,
+  "height": 440,
+  "title": {
+    "text": "Submarine cables connecting Australia",
+    "subtitle": "Great-circle paths to overseas landing points. Line width shows capacity in Tbps; hover any cable to trace it.",
+    "anchor": "start"
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E9ECEE",
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "graticule": {
+          "step": [
+            20,
+            20
+          ]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#D8DAD6",
+        "strokeWidth": 0.4,
+        "strokeOpacity": 0.85,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/world-atlas-countries-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#C9C3B5",
+        "strokeWidth": 0.4,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/cable_arcs_gc.json"
+      },
+      "params": [
+        {
+          "name": "cable_hl",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "fields": [
+              "name"
+            ],
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeCap": "round",
+        "strokeJoin": "round",
+        "clip": true,
+        "interpolate": "linear"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "order": {
+          "field": "order",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "name",
+          "type": "nominal"
+        },
+        "size": {
+          "field": "capacity_tbps",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              0.8,
+              4.5
+            ]
+          },
+          "title": [
+            "Capacity (Tbps)"
+          ],
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 10
+          }
+        },
+        "color": {
+          "field": "year_active",
+          "type": "quantitative",
+          "scale": {
+            "range": ["#BBCFE4", "#6E97C4", "#3C6BA6", "#16386B"]
+          },
+          "title": [
+            "Active since (year)"
+          ],
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "offset": 10,
+            "format": "d",
+            "gradientLength": 120
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "cable_hl",
+            "value": 0.95,
+            "empty": true
+          },
+          "value": 0.35
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Cable"
+          },
+          {
+            "field": "capacity_tbps",
+            "type": "quantitative",
+            "title": "Capacity (Tbps)",
+            "format": ",.1f"
+          },
+          {
+            "field": "year_active",
+            "type": "quantitative",
+            "title": "Active since",
+            "format": "d"
+          },
+          {
+            "field": "endpoint_name",
+            "type": "nominal",
+            "title": "Toward"
+          },
+          {
+            "field": "consortium",
+            "type": "nominal",
+            "title": "Operated by"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.85,
+            "lon": 151.21
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 115.86
+          },
+          {
+            "city": "Darwin",
+            "lat": -12.46,
+            "lon": 130.85
+          }
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 340,
+        "fill": "#3A6EA5",
+        "opacity": 0.18,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.85,
+            "lon": 151.21
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 115.86
+          },
+          {
+            "city": "Darwin",
+            "lat": -12.46,
+            "lon": 130.85
+          }
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 85,
+        "fill": "#1E4E84",
+        "stroke": "white",
+        "strokeWidth": 1.5,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "Cable landing"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "city": "Sydney",
+            "lat": -33.85,
+            "lon": 151.21
+          },
+          {
+            "city": "Perth",
+            "lat": -31.95,
+            "lon": 115.86
+          },
+          {
+            "city": "Darwin",
+            "lat": -12.46,
+            "lon": 130.85
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#161616",
+        "dy": -16,
+        "align": "center",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "city",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Fiji",
+            "lon": 178.42,
+            "lat": -18.12
+          },
+          {
+            "name": "USA-LA",
+            "lon": 241.75,
+            "lat": 33.95
+          },
+          {
+            "name": "Japan",
+            "lon": 139.69,
+            "lat": 35.68
+          },
+          {
+            "name": "USA-Hawaii",
+            "lon": 202.14,
+            "lat": 21.31
+          },
+          {
+            "name": "Guam",
+            "lon": 144.79,
+            "lat": 13.44
+          },
+          {
+            "name": "Singapore",
+            "lon": 103.82,
+            "lat": 1.35
+          },
+          {
+            "name": "PNG",
+            "lon": 147.18,
+            "lat": -9.44
+          },
+          {
+            "name": "NZ",
+            "lon": 174.76,
+            "lat": -36.85
+          },
+          {
+            "name": "Oman",
+            "lon": 58.41,
+            "lat": 23.59
+          }
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 18,
+        "fill": "#1A1A1A",
+        "opacity": 0.55,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Fiji",
+            "lon": 178.42,
+            "lat": -18.12
+          },
+          {
+            "name": "USA-LA",
+            "lon": 241.75,
+            "lat": 33.95
+          },
+          {
+            "name": "Japan",
+            "lon": 139.69,
+            "lat": 35.68
+          },
+          {
+            "name": "USA-Hawaii",
+            "lon": 202.14,
+            "lat": 21.31
+          },
+          {
+            "name": "Guam",
+            "lon": 144.79,
+            "lat": 13.44
+          },
+          {
+            "name": "Singapore",
+            "lon": 103.82,
+            "lat": 1.35
+          },
+          {
+            "name": "PNG",
+            "lon": 147.18,
+            "lat": -9.44
+          },
+          {
+            "name": "NZ",
+            "lon": 174.76,
+            "lat": -36.85
+          },
+          {
+            "name": "Oman",
+            "lon": 58.41,
+            "lat": 23.59
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "fill": "white",
+        "stroke": "white",
+        "strokeWidth": 2.5,
+        "clip": true,
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -9
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "name",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Fiji",
+            "lon": 178.42,
+            "lat": -18.12
+          },
+          {
+            "name": "USA-LA",
+            "lon": 241.75,
+            "lat": 33.95
+          },
+          {
+            "name": "Japan",
+            "lon": 139.69,
+            "lat": 35.68
+          },
+          {
+            "name": "USA-Hawaii",
+            "lon": 202.14,
+            "lat": 21.31
+          },
+          {
+            "name": "Guam",
+            "lon": 144.79,
+            "lat": 13.44
+          },
+          {
+            "name": "Singapore",
+            "lon": 103.82,
+            "lat": 1.35
+          },
+          {
+            "name": "PNG",
+            "lon": 147.18,
+            "lat": -9.44
+          },
+          {
+            "name": "NZ",
+            "lon": 174.76,
+            "lat": -36.85
+          },
+          {
+            "name": "Oman",
+            "lon": 58.41,
+            "lat": 23.59
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "fill": "#1A1A1A",
+        "clip": true,
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -9
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "name",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "rotate": [
+      -180,
+      0
+    ],
+    "center": [
+      -13,
+      6
+    ],
+    "scale": 133
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  }
+}

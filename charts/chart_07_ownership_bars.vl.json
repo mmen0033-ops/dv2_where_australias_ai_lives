@@ -1,0 +1,356 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 540,
+  "height": 330,
+  "title": {
+    "text": "Capacity by operator, and how few hold most of it",
+    "subtitle": "Each operator's total capacity, coloured by the country of its parent company. The five largest hold 85 percent of the national total; the other nine share the rest.",
+    "anchor": "start"
+  },
+  "data": {
+    "values": [
+      {
+        "operator": "Amazon AWS",
+        "owner_country": "US",
+        "total_mw": 390.0,
+        "share_pct": 23.7,
+        "cum_pct": 23.7,
+        "rank": 1,
+        "lbl": "390 MW (24%)"
+      },
+      {
+        "operator": "AirTrunk",
+        "owner_country": "US",
+        "total_mw": 320.0,
+        "share_pct": 19.4,
+        "cum_pct": 43.1,
+        "rank": 2,
+        "lbl": "320 MW (19%)"
+      },
+      {
+        "operator": "NextDC",
+        "owner_country": "AU",
+        "total_mw": 269.0,
+        "share_pct": 16.3,
+        "cum_pct": 59.4,
+        "rank": 3,
+        "lbl": "269 MW (16%)"
+      },
+      {
+        "operator": "Microsoft",
+        "owner_country": "US",
+        "total_mw": 235.0,
+        "share_pct": 14.3,
+        "cum_pct": 73.7,
+        "rank": 4,
+        "lbl": "235 MW (14%)"
+      },
+      {
+        "operator": "Equinix",
+        "owner_country": "US",
+        "total_mw": 188.7,
+        "share_pct": 11.5,
+        "cum_pct": 85.1,
+        "rank": 5,
+        "lbl": "189 MW (11%)"
+      },
+      {
+        "operator": "Global Switch",
+        "owner_country": "UK",
+        "total_mw": 52.5,
+        "share_pct": 3.2,
+        "cum_pct": 88.3,
+        "rank": 6,
+        "lbl": "52 MW (3%)"
+      },
+      {
+        "operator": "DCI Data Centers",
+        "owner_country": "SG",
+        "total_mw": 52.0,
+        "share_pct": 3.2,
+        "cum_pct": 91.5,
+        "rank": 7,
+        "lbl": "52 MW (3%)"
+      },
+      {
+        "operator": "Google",
+        "owner_country": "US",
+        "total_mw": 45.0,
+        "share_pct": 2.7,
+        "cum_pct": 94.2,
+        "rank": 8,
+        "lbl": "45 MW (3%)"
+      },
+      {
+        "operator": "Macquarie Telecom",
+        "owner_country": "AU",
+        "total_mw": 32.5,
+        "share_pct": 2.0,
+        "cum_pct": 96.2,
+        "rank": 9,
+        "lbl": "32 MW (2%)"
+      },
+      {
+        "operator": "Datacom",
+        "owner_country": "NZ",
+        "total_mw": 19.0,
+        "share_pct": 1.2,
+        "cum_pct": 97.3,
+        "rank": 10,
+        "lbl": "19 MW (1%)"
+      },
+      {
+        "operator": "Polaris Data Centres",
+        "owner_country": "AU",
+        "total_mw": 18.0,
+        "share_pct": 1.1,
+        "cum_pct": 98.4,
+        "rank": 11,
+        "lbl": "18 MW (1%)"
+      },
+      {
+        "operator": "Centersquare",
+        "owner_country": "US",
+        "total_mw": 14.0,
+        "share_pct": 0.8,
+        "cum_pct": 99.3,
+        "rank": 12,
+        "lbl": "14 MW (1%)"
+      },
+      {
+        "operator": "Vocus",
+        "owner_country": "AU",
+        "total_mw": 8.0,
+        "share_pct": 0.5,
+        "cum_pct": 99.8,
+        "rank": 13,
+        "lbl": "8 MW (0%)"
+      },
+      {
+        "operator": "ResetData",
+        "owner_country": "AU",
+        "total_mw": 4.0,
+        "share_pct": 0.2,
+        "cum_pct": 100.0,
+        "rank": 14,
+        "lbl": "4 MW (0%)"
+      }
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "operator",
+      "type": "nominal",
+      "sort": {
+        "field": "total_mw",
+        "op": "max",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {
+        "labelFontWeight": 500,
+        "labelColor": "#1A1A1A",
+        "labelLimit": 200
+      }
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hl7",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "fields": [
+              "operator"
+            ],
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "stroke": "white",
+        "strokeWidth": 1,
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "total_mw",
+          "type": "quantitative",
+          "title": "Capacity (MW)",
+          "axis": {
+            "format": ",.0f",
+            "grid": false
+          }
+        },
+        "color": {
+          "field": "owner_country",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "US",
+              "AU",
+              "UK",
+              "SG",
+              "NZ"
+            ],
+            "range": [
+              "#E0584F",
+              "#1F8B8A",
+              "#5B7FA6",
+              "#F39C42",
+              "#8A867C"
+            ]
+          },
+          "title": "Owner country",
+          "legend": {
+            "orient": "top"
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "hl7",
+            "value": 1,
+            "empty": true
+          },
+          "value": 0.32
+        },
+        "tooltip": [
+          {
+            "field": "operator",
+            "title": "Operator"
+          },
+          {
+            "field": "owner_country",
+            "title": "Owner country"
+          },
+          {
+            "field": "total_mw",
+            "title": "Capacity (MW)",
+            "format": ".1f"
+          },
+          {
+            "field": "share_pct",
+            "title": "Share of national total",
+            "format": ".1f"
+          },
+          {
+            "field": "cum_pct",
+            "title": "Cumulative share",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 4,
+        "fontSize": 9,
+        "fill": "#6B6B68"
+      },
+      "encoding": {
+        "x": {
+          "field": "total_mw",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lbl",
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hl7",
+            "value": 1,
+            "empty": true
+          },
+          "value": 0.45
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 175,
+            "y": "Google",
+            "t": "The top five operators hold"
+          },
+          {
+            "x": 175,
+            "y": "Macquarie Telecom",
+            "t": "85% of all national capacity."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "fill": "#1A1A1A"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "nominal"
+        },
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#6B6B68",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#1A1A1A",
+      "titleFontWeight": 500,
+      "domain": false,
+      "ticks": false,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 500,
+      "padding": 0,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1A1A1A",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#6B6B68",
+      "subtitleLineHeight": 15
+    }
+  }
+}

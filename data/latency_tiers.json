@@ -1,0 +1,34 @@
+[
+  {
+    "min_ms": 0,
+    "max_ms": 15,
+    "tier": "<15ms",
+    "use_case": "Real-time AI inference, financial trading, multiplayer gaming",
+    "population_pct": 84,
+    "color": "#E6DEF2"
+  },
+  {
+    "min_ms": 15,
+    "max_ms": 25,
+    "tier": "15-25ms",
+    "use_case": "Smooth video calls, cloud gaming, responsive AI assistants",
+    "population_pct": 12,
+    "color": "#BFA9DA"
+  },
+  {
+    "min_ms": 25,
+    "max_ms": 50,
+    "tier": "25-50ms",
+    "use_case": "General web, streaming, most consumer AI uses (slight delay)",
+    "population_pct": 3,
+    "color": "#9670BD"
+  },
+  {
+    "min_ms": 50,
+    "max_ms": 100,
+    "tier": "50-100ms",
+    "use_case": "Noticeable lag in interactive use, frustrating for AI chat",
+    "population_pct": 1,
+    "color": "#653A98"
+  }
+]

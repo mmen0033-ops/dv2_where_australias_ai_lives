@@ -1,0 +1,152 @@
+[
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "Asia-America Gateway",
+    "cable_capacity_tbps": 2.88
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "PIPE Pacific Cable",
+    "cable_capacity_tbps": 1.92
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "INDIGO Central",
+    "cable_capacity_tbps": 36.0
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "JGA-N (Japan-Guam-Australia North)",
+    "cable_capacity_tbps": 36.0
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "JGA-S (Japan-Guam-Australia South)",
+    "cable_capacity_tbps": 36.0
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "Coral Sea Cable System",
+    "cable_capacity_tbps": 20.0
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "Hawaiki Cable",
+    "cable_capacity_tbps": 43.8
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "Tasman Global Access",
+    "cable_capacity_tbps": 20.0
+  },
+  {
+    "cluster_lat": -33.819,
+    "cluster_lon": 151.15,
+    "city": "Sydney",
+    "landing_lat": -33.85,
+    "landing_lon": 151.2,
+    "landing_city": "Sydney",
+    "cable_name": "Southern Cross NEXT",
+    "cable_capacity_tbps": 72.0
+  },
+  {
+    "cluster_lat": -31.8595,
+    "cluster_lon": 115.8805,
+    "city": "Perth",
+    "landing_lat": -31.95,
+    "landing_lon": 115.85,
+    "landing_city": "Perth",
+    "cable_name": "SEA-ME-WE 3",
+    "cable_capacity_tbps": 0.96
+  },
+  {
+    "cluster_lat": -31.8595,
+    "cluster_lon": 115.8805,
+    "city": "Perth",
+    "landing_lat": -31.95,
+    "landing_lon": 115.85,
+    "landing_city": "Perth",
+    "cable_name": "Australia-Singapore Cable",
+    "cable_capacity_tbps": 60.0
+  },
+  {
+    "cluster_lat": -31.8595,
+    "cluster_lon": 115.8805,
+    "city": "Perth",
+    "landing_lat": -31.95,
+    "landing_lon": 115.85,
+    "landing_city": "Perth",
+    "cable_name": "INDIGO West",
+    "cable_capacity_tbps": 36.0
+  },
+  {
+    "cluster_lat": -31.8595,
+    "cluster_lon": 115.8805,
+    "city": "Perth",
+    "landing_lat": -31.95,
+    "landing_lon": 115.85,
+    "landing_city": "Perth",
+    "cable_name": "Oman Australia Cable",
+    "cable_capacity_tbps": 39.0
+  },
+  {
+    "cluster_lat": -12.4634,
+    "cluster_lon": 130.8456,
+    "city": "Darwin",
+    "landing_lat": -12.46,
+    "landing_lon": 130.85,
+    "landing_city": "Darwin",
+    "cable_name": "Echo Cable",
+    "cable_capacity_tbps": 192.0
+  },
+  {
+    "cluster_lat": -12.4634,
+    "cluster_lon": 130.8456,
+    "city": "Darwin",
+    "landing_lat": -12.46,
+    "landing_lon": 130.85,
+    "landing_city": "Darwin",
+    "cable_name": "Bifrost Cable",
+    "cable_capacity_tbps": 92.0
+  }
+]

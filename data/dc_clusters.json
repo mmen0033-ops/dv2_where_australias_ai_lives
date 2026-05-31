@@ -1,0 +1,58 @@
+[
+  {
+    "city": "Sydney",
+    "lat": -33.819,
+    "lon": 151.15,
+    "capacity_mw": 1068.2,
+    "facilities": 25,
+    "operators": 13
+  },
+  {
+    "city": "Melbourne",
+    "lat": -37.8185,
+    "lon": 144.92000000000002,
+    "capacity_mw": 457.5,
+    "facilities": 12,
+    "operators": 8
+  },
+  {
+    "city": "Brisbane",
+    "lat": -27.457,
+    "lon": 153.035,
+    "capacity_mw": 59.5,
+    "facilities": 5,
+    "operators": 4
+  },
+  {
+    "city": "Perth",
+    "lat": -31.8595,
+    "lon": 115.8805,
+    "capacity_mw": 39.0,
+    "facilities": 4,
+    "operators": 3
+  },
+  {
+    "city": "Adelaide",
+    "lat": -34.92875,
+    "lon": 138.60135,
+    "capacity_mw": 9.0,
+    "facilities": 2,
+    "operators": 2
+  },
+  {
+    "city": "Canberra",
+    "lat": -35.33,
+    "lon": 149.148,
+    "capacity_mw": 12.0,
+    "facilities": 2,
+    "operators": 2
+  },
+  {
+    "city": "Darwin",
+    "lat": -12.4634,
+    "lon": 130.8456,
+    "capacity_mw": 2.5,
+    "facilities": 1,
+    "operators": 1
+  }
+]

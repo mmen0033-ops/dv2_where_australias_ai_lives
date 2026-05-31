@@ -1,0 +1,313 @@
+{
+  "width": 560,
+  "height": 470,
+  "projection": {
+    "type": "mercator",
+    "scale": 505,
+    "center": [
+      134,
+      -26
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E9ECEE",
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "graticule": {
+          "step": [
+            10,
+            10
+          ]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#D8DAD6",
+        "strokeWidth": 0.35,
+        "strokeOpacity": 0.35,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_sa4"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.has_data == false"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEBE4",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.25,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_sa4"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.has_data == true"
+        },
+        {
+          "calculate": "datum.properties.state == 'New South Wales' ? 'NSW' : datum.properties.state == 'Victoria' ? 'VIC' : datum.properties.state == 'Queensland' ? 'QLD' : datum.properties.state == 'South Australia' ? 'SA' : datum.properties.state == 'Western Australia' ? 'WA' : datum.properties.state == 'Tasmania' ? 'TAS' : datum.properties.state == 'Northern Territory' ? 'NT' : datum.properties.state == 'Australian Capital Territory' ? 'ACT' : 'OTHER'",
+          "as": "_ab"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.25,
+        "clip": true
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.bivar",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "LL",
+              "LM",
+              "LH",
+              "ML",
+              "MM",
+              "MH",
+              "HL",
+              "HM",
+              "HH"
+            ],
+            "range": [
+              "#ECEAF2",
+              "#C5D6EC",
+              "#7FB0DC",
+              "#D2B6DD",
+              "#ABA8CE",
+              "#7385BC",
+              "#9B5FB8",
+              "#7858AE",
+              "#4A2E86"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "properties.state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "properties.latency_ms",
+            "type": "quantitative",
+            "title": "Latency (ms)",
+            "format": ".1f"
+          },
+          {
+            "field": "properties.population",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ","
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "hlState == 'All' || datum._ab == hlState",
+            "value": 1
+          },
+          "value": 0.12
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/au_geo.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "au_states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#5F5B52",
+        "strokeWidth": 0.7,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 138.0,
+            "lat": -35.2
+          },
+          {
+            "lon": 132.0,
+            "lat": -40.5
+          }
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "stroke": "#1A1A1A",
+        "strokeWidth": 1,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "order": {
+          "value": 1
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 138.0,
+            "lat": -35.2
+          }
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "size": 36,
+        "fill": "#1A1A1A"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 129.5,
+            "lat": -41.3,
+            "t": "Adelaide: ~808k residents at ~20 ms"
+          },
+          {
+            "lon": 129.5,
+            "lat": -42.5,
+            "t": "four times the latency of comparable metros"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "fill": "#1A1A1A",
+        "lineBreak": "|"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon"
+        },
+        "latitude": {
+          "field": "lat"
+        },
+        "text": {
+          "field": "t",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Who pays the latency tax: connectivity against population",
+    "anchor": "start"
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#6B6B68",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#1A1A1A",
+      "titleFontWeight": 500,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "axisX": {
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 500,
+      "padding": 0,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1A1A1A",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#6B6B68"
+    }
+  },
+  "params": [
+    {
+      "name": "hlState",
+      "value": "All"
+    }
+  ]
+}

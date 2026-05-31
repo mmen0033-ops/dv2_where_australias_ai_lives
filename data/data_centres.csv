@@ -1,0 +1,52 @@
+id,name,operator,operator_type,owner_country,city,suburb,state,lat,lon,capacity_mw,year_opened
+DC001,Equinix SY1,Equinix,Foreign Hyperscaler,US,Sydney,Mascot,NSW,-33.9301,151.1893,7.0,2002
+DC002,Equinix SY2,Equinix,Foreign Hyperscaler,US,Sydney,Mascot,NSW,-33.9311,151.1883,5.5,2008
+DC003,Equinix SY3,Equinix,Foreign Hyperscaler,US,Sydney,Alexandria,NSW,-33.9173,151.1937,12.0,2014
+DC004,Equinix SY4,Equinix,Foreign Hyperscaler,US,Sydney,Alexandria,NSW,-33.9183,151.1927,14.0,2017
+DC005,Equinix SY5,Equinix,Foreign Hyperscaler,US,Sydney,Alexandria,NSW,-33.9193,151.1917,19.2,2021
+DC006,Equinix SY6,Equinix,Foreign Hyperscaler,US,Sydney,Lane Cove West,NSW,-33.8167,151.15,28.0,2023
+DC007,Equinix SY9,Equinix,Foreign Hyperscaler,US,Sydney,Mascot,NSW,-33.929,151.19,75.0,2025
+DC008,AWS Sydney AZ1,Amazon AWS,Foreign Hyperscaler,US,Sydney,Auburn,NSW,-33.8497,151.0317,60.0,2012
+DC009,AWS Sydney AZ2,Amazon AWS,Foreign Hyperscaler,US,Sydney,Macquarie Park,NSW,-33.774,151.114,80.0,2015
+DC010,AWS Sydney AZ3,Amazon AWS,Foreign Hyperscaler,US,Sydney,Eastern Creek,NSW,-33.806,150.8503,100.0,2018
+DC011,Microsoft Azure Sydney,Microsoft,Foreign Hyperscaler,US,Sydney,Wright,NSW,-33.747,150.905,70.0,2014
+DC012,Microsoft Azure Sydney 2,Microsoft,Foreign Hyperscaler,US,Sydney,Erskine Park,NSW,-33.803,150.79,85.0,2020
+DC013,Google Cloud Sydney,Google,Foreign Hyperscaler,US,Sydney,Lonsdale St,NSW,-33.8688,151.2093,45.0,2017
+DC014,NextDC S1,NextDC,Domestic,AU,Sydney,Macquarie Park,NSW,-33.774,151.118,6.0,2014
+DC015,NextDC S2,NextDC,Domestic,AU,Sydney,Macquarie Park,NSW,-33.7745,151.1175,30.0,2019
+DC016,NextDC S3,NextDC,Domestic,AU,Sydney,Artarmon,NSW,-33.809,151.183,80.0,2024
+DC017,Global Switch Sydney,Global Switch,Foreign,UK,Sydney,Ultimo,NSW,-33.883,151.198,32.5,2010
+DC018,AirTrunk SYD1,AirTrunk,Foreign Hyperscaler,US,Sydney,Huntingwood,NSW,-33.79,150.85,130.0,2017
+DC019,AirTrunk SYD2,AirTrunk,Foreign Hyperscaler,US,Sydney,Lane Cove,NSW,-33.819,151.17,110.0,2021
+DC020,Macquarie Telecom IC3,Macquarie Telecom,Domestic,AU,Sydney,Macquarie Park,NSW,-33.7755,151.119,25.0,2019
+DC021,Vocus North Sydney,Vocus,Domestic,AU,Sydney,North Sydney,NSW,-33.8395,151.2075,5.5,2015
+DC022,Datacom Sydney,Datacom,Domestic,NZ,Sydney,Silverwater,NSW,-33.816,151.05,8.5,2016
+DC023,DCI Sydney,DCI Data Centers,Foreign,SG,Sydney,Knoxfield,NSW,-33.85,151.09,22.0,2020
+DC024,Centersquare SYD,Centersquare,Foreign,US,Sydney,Lane Cove,NSW,-33.817,151.169,14.0,2018
+DC025,ResetData Sydney,ResetData,Domestic,AU,Sydney,Auburn,NSW,-33.85,151.034,4.0,2022
+DC026,Equinix ME1,Equinix,Foreign Hyperscaler,US,Melbourne,Port Melbourne,VIC,-37.839,144.941,8.0,2003
+DC027,Equinix ME2,Equinix,Foreign Hyperscaler,US,Melbourne,Port Melbourne,VIC,-37.84,144.942,15.0,2015
+DC028,AWS Melbourne AZ1,Amazon AWS,Foreign Hyperscaler,US,Melbourne,Tullamarine,VIC,-37.668,144.841,55.0,2022
+DC029,AWS Melbourne AZ2,Amazon AWS,Foreign Hyperscaler,US,Melbourne,Derrimut,VIC,-37.79,144.777,60.0,2023
+DC030,Microsoft Azure Melbourne,Microsoft,Foreign Hyperscaler,US,Melbourne,Truganina,VIC,-37.815,144.739,80.0,2024
+DC031,NextDC M1,NextDC,Domestic,AU,Melbourne,Port Melbourne,VIC,-37.841,144.94,6.0,2012
+DC032,NextDC M2,NextDC,Domestic,AU,Melbourne,Tullamarine,VIC,-37.68,144.84,28.0,2019
+DC033,NextDC M3,NextDC,Domestic,AU,Melbourne,Footscray,VIC,-37.799,144.9,80.0,2025
+DC034,AirTrunk MEL1,AirTrunk,Foreign Hyperscaler,US,Melbourne,Derrimut,VIC,-37.791,144.778,80.0,2018
+DC035,Global Switch Melbourne,Global Switch,Foreign,UK,Melbourne,Port Melbourne,VIC,-37.842,144.943,20.0,2011
+DC036,DCI Melbourne,DCI Data Centers,Foreign,SG,Melbourne,Hawthorn,VIC,-37.822,145.029,18.0,2021
+DC037,Datacom Melbourne,Datacom,Domestic,NZ,Melbourne,Port Melbourne,VIC,-37.843,144.944,7.5,2014
+DC038,NextDC B1,NextDC,Domestic,AU,Brisbane,Fortitude Valley,QLD,-27.4575,153.0345,4.5,2011
+DC039,NextDC B2,NextDC,Domestic,AU,Brisbane,Fortitude Valley,QLD,-27.457,153.035,12.0,2019
+DC040,Polaris DC1,Polaris Data Centres,Domestic,AU,Brisbane,Springfield,QLD,-27.67,152.92,18.0,2020
+DC041,Equinix BR1,Equinix,Foreign Hyperscaler,US,Brisbane,Murarrie,QLD,-27.457,153.09,5.0,2014
+DC042,AWS Brisbane Local,Amazon AWS,Foreign Hyperscaler,US,Brisbane,Hemmant,QLD,-27.44,153.15,20.0,2024
+DC043,NextDC P1,NextDC,Domestic,AU,Perth,Malaga,WA,-31.858,115.881,6.0,2014
+DC044,NextDC P2,NextDC,Domestic,AU,Perth,Malaga,WA,-31.859,115.882,6.0,2021
+DC045,DCI Perth,DCI Data Centers,Foreign,SG,Perth,Malaga,WA,-31.86,115.88,12.0,2022
+DC046,AWS Perth Local,Amazon AWS,Foreign Hyperscaler,US,Perth,Henderson,WA,-32.17,115.77,15.0,2024
+DC047,NextDC A1,NextDC,Domestic,AU,Adelaide,Adelaide CBD,SA,-34.9285,138.6007,6.0,2017
+DC048,Datacom Adelaide,Datacom,Domestic,NZ,Adelaide,Adelaide CBD,SA,-34.929,138.602,3.0,2018
+DC049,NextDC C1,NextDC,Domestic,AU,Canberra,Hume,ACT,-35.37,149.166,4.5,2013
+DC050,Macquarie Govt Canberra,Macquarie Telecom,Domestic,AU,Canberra,Canberra,ACT,-35.29,149.13,7.5,2014
+DC051,Vocus Darwin,Vocus,Domestic,AU,Darwin,Darwin,NT,-12.4634,130.8456,2.5,2018

@@ -1,0 +1,190 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 560,
+  "height": 360,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "title": {
+    "text": "Most regions have no local data centre at all",
+    "subtitle": "Each dot is an SA4 region by population. Regions split into those with local capacity (top) and those with none (bottom)."
+  },
+  "data": {
+    "url": "data/sa4_capacity.json"
+  },
+  "transform": [
+    {
+      "calculate": "datum.capacity_mw > 0 ? 'Has local capacity' : 'Zero local capacity'",
+      "as": "band"
+    },
+    {
+      "calculate": "random()",
+      "as": "jitter"
+    }
+  ],
+  "params": [
+    {
+      "name": "hl_region",
+      "select": {
+        "type": "point",
+        "on": "mouseover",
+        "fields": [
+          "sa4_name"
+        ],
+        "clear": "mouseout"
+      }
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "stroke": "white",
+    "strokeWidth": 0.7,
+    "cursor": "pointer"
+  },
+  "encoding": {
+    "x": {
+      "field": "population",
+      "type": "quantitative",
+      "scale": {
+        "type": "log",
+        "domain": [
+          50000,
+          1300000
+        ]
+      },
+      "title": "Region population (log scale)",
+      "axis": {
+        "format": "~s"
+      }
+    },
+    "y": {
+      "field": "band",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Has local capacity",
+        "Zero local capacity"
+      ],
+      "axis": {
+        "labelFontWeight": 600,
+        "labelColor": "#161616",
+        "labelFontSize": 12,
+        "labelLimit": 160
+      }
+    },
+    "yOffset": {
+      "field": "jitter",
+      "type": "quantitative"
+    },
+    "size": {
+      "field": "capacity_mw",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          1100
+        ],
+        "range": [
+          40,
+          700
+        ]
+      },
+      "title": "Local capacity (MW)",
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "offset": 8
+      }
+    },
+    "color": {
+      "field": "band",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Has local capacity",
+          "Zero local capacity"
+        ],
+        "range": [
+          "#3A6EA5",
+          "#C9C5B8"
+        ]
+      },
+      "legend": null
+    },
+    "opacity": {
+      "condition": {
+        "param": "hl_region",
+        "value": 0.95,
+        "empty": true
+      },
+      "value": 0.4
+    },
+    "tooltip": [
+      {
+        "field": "sa4_name",
+        "type": "nominal",
+        "title": "Region"
+      },
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "population",
+        "type": "quantitative",
+        "title": "Population",
+        "format": ","
+      },
+      {
+        "field": "capacity_mw",
+        "type": "quantitative",
+        "title": "Local capacity (MW)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#54544F",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#161616",
+      "titleFontWeight": 600,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5
+    },
+    "axisX": {
+      "grid": true
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#161616",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#54544F"
+    }
+  }
+}

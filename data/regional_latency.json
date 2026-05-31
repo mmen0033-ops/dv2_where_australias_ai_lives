@@ -1,0 +1,52 @@
+[
+  {
+    "city": "Sydney CBD",
+    "latency": 6.2,
+    "city_class": "Hyperscaler home"
+  },
+  {
+    "city": "Brisbane",
+    "latency": 17.5,
+    "city_class": "Capital city"
+  },
+  {
+    "city": "Adelaide",
+    "latency": 19.8,
+    "city_class": "Capital city"
+  },
+  {
+    "city": "Perth",
+    "latency": 21.5,
+    "city_class": "Capital city"
+  },
+  {
+    "city": "Hobart",
+    "latency": 32.1,
+    "city_class": "Capital city"
+  },
+  {
+    "city": "Cairns",
+    "latency": 36.7,
+    "city_class": "Regional"
+  },
+  {
+    "city": "Townsville",
+    "latency": 30.6,
+    "city_class": "Regional"
+  },
+  {
+    "city": "Darwin",
+    "latency": 78.9,
+    "city_class": "Regional"
+  },
+  {
+    "city": "Alice Springs",
+    "latency": 47.0,
+    "city_class": "Remote"
+  },
+  {
+    "city": "Broome",
+    "latency": 39.5,
+    "city_class": "Remote"
+  }
+]

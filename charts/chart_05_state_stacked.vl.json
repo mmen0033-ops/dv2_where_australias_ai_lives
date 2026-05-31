@@ -1,0 +1,179 @@
+{
+  "width": 540,
+  "height": 280,
+  "title": {
+    "text": "Capacity by state, broken down by ownership type",
+    "subtitle": "Total MW by state. NSW and Victoria hold 92% of national capacity."
+  },
+  "data": {
+    "url": "data/data_centres.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "capacity_mw",
+          "as": "total_mw"
+        }
+      ],
+      "groupby": [
+        "state",
+        "operator_type"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "total_mw",
+          "as": "state_total"
+        }
+      ],
+      "groupby": [
+        "state"
+      ]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "stroke": "white",
+    "strokeWidth": 0.5,
+    "cornerRadiusEnd": 2
+  },
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": {
+        "labelFontWeight": 500,
+        "labelColor": "#1A1A1A"
+      }
+    },
+    "x": {
+      "field": "total_mw",
+      "type": "quantitative",
+      "title": "Capacity (MW)",
+      "axis": {
+        "format": ",.0f"
+      }
+    },
+    "color": {
+      "field": "operator_type",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Foreign Hyperscaler",
+          "Foreign",
+          "Domestic"
+        ],
+        "range": [
+          "#E0584F",
+          "#F39C42",
+          "#1F8B8A"
+        ]
+      },
+      "title": "Operator type",
+      "legend": {
+        "orient": "top"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "operator_type",
+        "type": "nominal",
+        "title": "Ownership"
+      },
+      {
+        "field": "total_mw",
+        "type": "quantitative",
+        "title": "Capacity (MW)",
+        "format": ".1f"
+      },
+      {
+        "field": "state_total",
+        "type": "quantitative",
+        "title": "State total (MW)",
+        "format": ".1f"
+      }
+    ],
+    "opacity": {
+      "condition": {
+        "param": "hl5",
+        "value": 1,
+        "empty": true
+      },
+      "value": 0.35
+    }
+  },
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "font": "Hanken Grotesk, system-ui, sans-serif",
+    "axis": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "labelColor": "#6B6B68",
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleColor": "#1A1A1A",
+      "titleFontWeight": 500,
+      "domain": false,
+      "ticks": false,
+      "grid": true,
+      "gridColor": "#E5E2D9",
+      "gridOpacity": 0.5,
+      "labelPadding": 6
+    },
+    "axisX": {
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Hanken Grotesk, system-ui, sans-serif",
+      "labelFontSize": 11,
+      "titleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "titleFontSize": 11,
+      "titleFontWeight": 500,
+      "padding": 0,
+      "symbolType": "circle"
+    },
+    "title": {
+      "font": "Hanken Grotesk, system-ui, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1A1A1A",
+      "anchor": "start",
+      "offset": 8,
+      "subtitleFont": "Hanken Grotesk, system-ui, sans-serif",
+      "subtitleFontSize": 11,
+      "subtitleColor": "#6B6B68"
+    }
+  },
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "params": [
+    {
+      "name": "hl5",
+      "select": {
+        "type": "point",
+        "on": "mouseover",
+        "fields": [
+          "operator_type"
+        ],
+        "clear": "mouseout"
+      }
+    }
+  ]
+}
